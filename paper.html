@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#f3f0e7">
+<meta name="description" content="Preprint — A formally specified warning criterion for collapse in recursive systems. A Lean-specified obstruction, a conditional G/p/δ telemetry bridge, and a matched-false-positive benchmark on frozen public market and recommender data.">
+
+<link rel="canonical" href="https://loopzero.org/paper.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Loopzero">
+<meta property="og:url" content="https://loopzero.org/paper.html">
+<meta property="og:title" content="A formally specified warning criterion for collapse in recursive systems">
+<meta property="og:description" content="A Lean-specified obstruction, a conditional G/p/δ bridge, and a matched-false-positive benchmark on frozen public data. The null is reported in full.">
+<meta property="og:image" content="https://loopzero.org/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400;1,8..60,500&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream:#f3f0e7; --paper-2:#efebe0; --ink:#1a1710; --ink-2:#48443c; --ink-3:#8c8880;
+  --rule-lt:#d8d4c8; --rule-2:#c9c4b6; --ph:#1faa5e; --ph-border:rgba(45,214,122,.55);
+  --ph-dim:rgba(45,214,122,.05); --over:#b4502a;
+  --serif:'Source Serif 4',Georgia,serif; --mono:'IBM Plex Mono','Courier New',monospace;
+}
+html { font-size:18px; -webkit-text-size-adjust:100%; text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased; font-feature-settings:"liga" 1,"kern" 1,"onum" 1;
+  background:var(--cream); color-scheme:only light; }
+body { background:var(--cream); color:var(--ink); font-family:var(--serif); line-height:1.75; }
+.page { max-width:720px; margin:0 auto 0 max(80px,13vw); padding:52px 0 132px; }
+a { color:var(--ink); text-decoration:underline; text-decoration-color:var(--rule-2);
+  text-underline-offset:3px; text-decoration-thickness:1px; transition:text-decoration-color .14s,color .14s; }
+a:hover { text-decoration-color:var(--ph); }
+
+nav { margin-bottom:46px; padding-bottom:16px; border-bottom:1px solid var(--rule-lt);
+  display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.nav-list { list-style:none; display:flex; gap:0 26px; flex-wrap:wrap; }
+.nav-list a { font-family:var(--mono); font-size:0.56rem; font-weight:400; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--ink-3); text-decoration:none; }
+.nav-list a:hover { color:var(--ink); }
+.nav-list a[aria-current="page"] { color:var(--ink-2); }
+.nav-home { font-family:var(--mono); font-size:0.56rem; font-weight:500; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--ink-2); text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+.nav-home:hover { color:var(--ink); }
+.mark svg { display:block; overflow:visible; }
+.mark .spiral { stroke:var(--ink); stroke-width:1.2; fill:none; stroke-linecap:round; }
+.mark .core { fill:var(--ph); }
+
+.eyebrow { font-family:var(--mono); font-size:0.54rem; font-weight:500; letter-spacing:0.26em;
+  text-transform:uppercase; color:var(--ph); margin-bottom:16px; }
+.title { font-family:var(--serif); font-size:1.7rem; font-weight:500; font-style:italic;
+  line-height:1.28; letter-spacing:-0.01em; color:var(--ink); max-width:24ch; margin-bottom:14px; }
+.byline { font-family:var(--mono); font-size:0.6rem; font-weight:300; color:var(--ink-2);
+  letter-spacing:0.03em; line-height:1.8; margin-bottom:22px; }
+.byline a { color:var(--ink-2); text-decoration:none; }
+.byline a:hover { color:var(--ph); }
+
+.toplinks { display:flex; flex-wrap:wrap; gap:0 22px; padding:14px 0; border-top:1px solid var(--rule-lt);
+  border-bottom:1px solid var(--rule-lt); margin-bottom:48px; }
+.toplinks a { font-family:var(--mono); font-size:0.62rem; font-weight:400; color:var(--ink);
+  text-decoration:underline; text-decoration-color:var(--rule-2); white-space:nowrap; }
+.toplinks a:hover { text-decoration-color:var(--ph); }
+
+section { margin-bottom:48px; }
+h2 { font-family:var(--mono); font-size:0.56rem; font-weight:400; letter-spacing:0.24em;
+  text-transform:uppercase; color:var(--ink-2); margin-bottom:22px; margin-left:-80px;
+  width:calc(100% + 80px); line-height:1.4; }
+p { max-width:58ch; margin-bottom:1.2em; font-size:1rem; line-height:1.74; }
+p:last-child { margin-bottom:0; }
+.sub { color:var(--ink-2); }
+em.term { font-style:italic; }
+code { font-family:var(--mono); font-size:0.82em; color:var(--ink); }
+.band { font-family:var(--mono); font-size:0.88em; white-space:nowrap; }
+
+.summary { max-width:58ch; border-left:2px solid var(--ph-border); background:var(--ph-dim);
+  padding:18px 22px; font-family:var(--serif); font-size:1.02rem; line-height:1.66; color:var(--ink); }
+
+.result { max-width:58ch; border:1px solid var(--rule-2); border-top:3px solid var(--ink);
+  background:var(--paper-2); padding:20px 24px; }
+.result .rlabel { font-family:var(--mono); font-size:0.5rem; font-weight:500; letter-spacing:0.24em;
+  text-transform:uppercase; color:var(--ink-2); display:block; margin-bottom:12px; }
+.result p { font-size:0.98rem; max-width:none; }
+.result .pull { font-weight:500; }
+
+.fals { list-style:none; max-width:58ch; border-top:1px solid var(--rule-lt); }
+.fals li { padding:13px 0 13px 22px; border-bottom:1px solid var(--rule-lt); position:relative;
+  font-size:0.94rem; line-height:1.6; color:var(--ink-2); }
+.fals li::before { content:"—"; position:absolute; left:0; color:var(--over); font-family:var(--mono); }
+
+.cite-box { max-width:58ch; border:1px solid var(--rule-lt); background:rgba(0,0,0,.018);
+  padding:16px 18px; font-family:var(--mono); font-size:0.66rem; line-height:1.7; color:var(--ink-2);
+  white-space:pre-wrap; word-break:break-word; }
+
+footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt); }
+.footer-text { font-family:var(--mono); font-size:0.56rem; font-weight:300; color:var(--ink-2);
+  letter-spacing:0.05em; line-height:1.9; }
+.footer-text a { font-family:var(--mono); font-size:0.56rem; font-weight:300; color:var(--ink-2); text-decoration:none; }
+.footer-text a:hover { color:var(--ph); }
+.foot-sep { color:var(--ink-3); }
+
+@media (max-width:760px){ html{font-size:17px;} .page{margin:0 auto;padding:46px 32px 96px;} h2{margin-left:0;width:100%;} .title{font-size:1.46rem;} }
+@media (max-width:460px){ html{font-size:16px;} .page{padding:34px 20px 80px;} .nav-list{gap:12px 18px;} }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ScholarlyArticle",
+  "headline":"A formally specified warning criterion for collapse in recursive systems",
+  "author":{"@type":"Person","name":"David Mullett","identifier":"https://orcid.org/0009-0004-2543-1664"},
+  "isPartOf":{"@type":"ResearchProject","name":"Loopzero","url":"https://loopzero.org/"},
+  "url":"https://loopzero.org/paper.html"
+}
+</script>
+</head>
+
+<body style="background:#f3f0e7 !important; color:#1a1710 !important;">
+<div class="page">
+<main>
+
+<nav aria-label="Site navigation">
+  <a class="nav-home" href="index.html">
+    <span class="mark" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Loopzero mark">
+        <path class="spiral" d="M40,40 Q40,8 66,14 Q82,25 80,48 Q74,69 50,74 Q23,78 9,56 Q-4,34 8,14 Q20,-4 42,2 Q66,8 76,30 Q84,54 70,68 Q54,82 34,80 Q14,78 6,62 Q-2,46 8,34 Q18,22 34,20 Q52,18 60,34 Q68,50 58,62 Q48,74 36,70 Q24,66 22,54 Q20,44 28,38 Q36,32 44,36 Q52,40 50,48 Q48,56 42,54 Q38,52 38,48 Q38,44 41,42"/>
+        <circle class="core" cx="41" cy="42" r="3"/>
+      </svg>
+    </span>
+    Loopzero
+  </a>
+  <ul class="nav-list">
+    <li><a href="index.html">Research</a></li>
+    <li><a href="paper.html" aria-current="page">Paper</a></li>
+    <li><a href="https://davidmullett.com/about.html" target="_blank" rel="noopener">About</a></li>
+    <li><a href="mailto:d@loopzero.org">Contact</a></li>
+  </ul>
+</nav>
+
+<header>
+  <div class="eyebrow">Preprint</div>
+  <h1 class="title">A formally specified warning criterion for collapse in recursive systems</h1>
+  <div class="byline">
+    David Mullett &nbsp;·&nbsp; Independent researcher &nbsp;·&nbsp;
+    <a href="https://orcid.org/0009-0004-2543-1664" target="_blank" rel="noopener">ORCID 0009-0004-2543-1664</a>
+  </div>
+  <!-- TODO before launch: arXiv goes live today. Replace the two href="#" below:
+       PDF   -> https://arxiv.org/pdf/XXXX.XXXXX
+       arXiv -> https://arxiv.org/abs/XXXX.XXXXX
+       Then add the eprint to the BibTeX block near the bottom of this file. -->
+  <div class="toplinks">
+    <a href="#" title="Replace with https://arxiv.org/pdf/XXXX.XXXXX">PDF</a>
+    <a href="#" title="Replace with https://arxiv.org/abs/XXXX.XXXXX">arXiv</a>
+    <a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">Code &amp; Lean artifact</a>
+    <a href="#bibtex">BibTeX</a>
+  </div>
+</header>
+
+<section>
+  <h2>One-sentence summary</h2>
+  <div class="summary">
+    Across public market and recommender benchmarks, collapse-like events were
+    preceded by a directional gain–persistence–diversity pattern; under a locked
+    false-positive contract, however, neither the tested standard comparators nor
+    the pre-registered Loopzero detector achieved an accepted operating point —
+    establishing a falsifiable benchmark framework for recursive-collapse warnings.
+  </div>
+</section>
+
+<section>
+  <h2>Abstract</h2>
+  <p>
+    Recursive systems can enter collapse-like regimes before overt failure is
+    visible: amplification, endogenous recycling, and contraction of accessible
+    trajectories reinforce one another while local updates remain coherent. The
+    paper defines a warning criterion around a minimal <em class="term">no-progress
+    obstruction</em>, with the claim boundary specified in Lean&nbsp;4, and
+    instantiates it through three telemetry witnesses — gain (G), recursive
+    persistence (p), and diversity (δ). Under stated assumptions, the obstruction
+    motivates a testable prediction: pre-collapse regimes should show rising
+    amplification, rising recursive persistence, and declining diversity.
+  </p>
+  <p>
+    The prediction is evaluated on two frozen public benchmark domains — a
+    canonical segmented markets family (Volmageddon 2018, COVID 2020) and a
+    50-step MovieLens-25M recommender replay — under a matched false-positive
+    contract that compares detectors at the same alert budget rather than at
+    arbitrary thresholds. Under the locked equal-false-positive band
+    <span class="band">[0.03, 0.07]</span>, <strong>no tested comparator
+    configuration and not the pre-registered Loopzero quantile detector achieved
+    an accepted operating point</strong> on either benchmark. Directional witness
+    summaries aligned on the canonical recommender benchmark and on the late-window
+    markets summary. A third domain — recursive LLM training-loop collapse
+    (Shumailov et&nbsp;al., 2024) — is reported as secondary directional
+    corroboration only.
+  </p>
+  <p class="sub">
+    Reported as a falsifiable benchmark for recursive-collapse warnings: the
+    directional G/p/δ bridge is supported, while binary operational-detector
+    acceptance remains open for threshold-path calibration and further detector
+    development.
+  </p>
+</section>
+
+<section>
+  <h2>The result, stated plainly</h2>
+  <div class="result">
+    <span class="rlabel">Reported in full</span>
+    <p class="pull">
+      On both flagship benchmarks, every tested detector failed the contract —
+      the standard early-warning methods and Loopzero's own.
+    </p>
+    <p>
+      This is the load-bearing finding, not a footnote. A matched false-positive
+      contract is falsifiable in both directions: a comparator fails if its
+      calibration grid places no operating point inside the band, and the
+      pre-registered detector fails under the same rule. Here, both did. What
+      that leaves standing is a framework others can test and a directional
+      signature that held in the pre-collapse windows — not a finished detector.
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>What would falsify it</h2>
+  <ul class="fals">
+    <li>Externally defined collapse events occurring without the predicted G↑ / p↑ / δ↓ pattern in the pre-collapse window.</li>
+    <li>Control periods showing the same pattern without any subsequent collapse.</li>
+    <li>A tested standard comparator recovering an accepted operating point under the locked contract on the canonical benchmarks.</li>
+    <li>The pre-registered detector recovering acceptance on benchmarks where the directional bridge signature is absent.</li>
+    <li>Alternative reasonable operationalizations of amplification, persistence, and contraction failing to agree directionally.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Scope &amp; limitations</h2>
+  <p class="sub">
+    Witness construction is still domain-adapted. The bridge is empirical, not an
+    identification result. Comparator scope can expand. Component-level necessity
+    of G, p, and δ is not yet established through ablations. Recommender negative
+    controls, wild cluster bootstrap, and additional domains under full
+    matched-false-positive evaluation are open next steps — stress-testing rather
+    than rhetorical expansion.
+  </p>
+</section>
+
+<section id="bibtex">
+  <h2>Cite</h2>
+  <div class="cite-box">@misc{mullett_recursive_collapse,
+  author = {Mullett, David},
+  title  = {A formally specified warning criterion for collapse in recursive systems},
+  year   = {2026},
+  note   = {Preprint},
+  url    = {https://loopzero.org/paper.html}
+}</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-text">
+    loopzero.org
+    <span class="foot-sep">&nbsp;·&nbsp;</span>
+    <a href="https://davidmullett.com/" target="_blank" rel="noopener">davidmullett.com</a>
+    <span class="foot-sep">&nbsp;·&nbsp;</span>
+    <a href="https://orcid.org/0009-0004-2543-1664" target="_blank" rel="noopener">ORCID&nbsp;0009-0004-2543-1664</a>
+    <span class="foot-sep">&nbsp;·&nbsp;</span>
+    <a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

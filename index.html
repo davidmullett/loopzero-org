@@ -5,46 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="only light">
 <meta name="theme-color" content="#f3f0e7">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-<meta name="description" content="Loopzero — a theorem-grounded research program on warning criteria for recursive feedback systems. Principal investigator: David Mullett.">
+<meta name="description" content="Loopzero — an independent research program on early-warning signatures in recursive systems. A formally specified warning criterion, a conditional telemetry bridge (G, p, δ), and a matched-false-positive benchmark on frozen public data. The null is reported in full.">
 
-<!-- Open Graph / Facebook / WhatsApp / iMessage / LinkedIn -->
+<link rel="canonical" href="https://loopzero.org/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<!-- Open Graph -->
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Loopzero">
 <meta property="og:url" content="https://loopzero.org/">
-<meta property="og:title" content="Loopzero">
-<meta property="og:description" content="A theorem-grounded research program on warning criteria for recursive feedback systems.">
+<meta property="og:title" content="Loopzero — a falsifiable test for collapse-warning claims in recursive systems">
+<meta property="og:description" content="A formally specified warning criterion, evaluated under a locked false-positive contract on public market and recommender data. The null is reported in full.">
 <meta property="og:image" content="https://loopzero.org/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Loopzero — a theorem-grounded research program on warning criteria for recursive feedback systems.">
 
-<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://loopzero.org/">
-<meta name="twitter:title" content="Loopzero">
-<meta name="twitter:description" content="A theorem-grounded research program on warning criteria for recursive feedback systems.">
+<meta name="twitter:title" content="Loopzero — a falsifiable test for collapse-warning claims in recursive systems">
+<meta name="twitter:description" content="A formally specified warning criterion, evaluated under a locked false-positive contract on public data.">
 <meta name="twitter:image" content="https://loopzero.org/og-image.png">
-
-<title>Loopzero</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400;1,8..60,500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400;1,8..60,500&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --cream:     #f3f0e7;
+  --paper-2:   #efebe0;
   --ink:       #1a1710;
   --ink-2:     #48443c;
   --ink-3:     #8c8880;
   --rule-lt:   #d8d4c8;
-  --ph:        #2dd67a;
-  --ph-dim:    rgba(45,214,122,.04);
+  --rule-2:    #c9c4b6;
+  --ph:        #1faa5e;            /* phosphor, slightly deepened for AA on cream */
+  --ph-bright: #2dd67a;
+  --ph-dim:    rgba(45,214,122,.06);
+  --ph-dim-2:  rgba(45,214,122,.04);
   --ph-border: rgba(45,214,122,.55);
+  --over:      #b4502a;            /* over-band failure tone */
   --serif:     'Source Serif 4', Georgia, serif;
   --mono:      'IBM Plex Mono', 'Courier New', Courier, monospace;
 }
@@ -55,272 +56,391 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "liga" 1, "kern" 1, "onum" 1;
-  background: #f3f0e7;
+  background: var(--cream);
   color-scheme: only light;
 }
+body { background: var(--cream); color: var(--ink); font-family: var(--serif); line-height: 1.75; }
 
-body {
-  background: var(--cream);
-  color: var(--ink);
-  font-family: var(--serif);
-  line-height: 1.75;
-}
-
-.page {
-  max-width: 680px;
-  margin: 0 auto 0 max(80px, 14vw);
-  padding: 56px 0 128px;
-}
-
-.mark { display: block; line-height: 0; margin-bottom: 28px; opacity: 0.82; }
-.mark svg { display: block; overflow: visible; }
+/* Left-anchored asymmetric column — shared family signature */
+.page { max-width: 720px; margin: 0 auto 0 max(80px, 13vw); padding: 52px 0 132px; }
 
 a {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--rule-lt);
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
+  color: var(--ink); text-decoration: underline;
+  text-decoration-color: var(--rule-2); text-underline-offset: 3px; text-decoration-thickness: 1px;
   transition: text-decoration-color .14s, color .14s;
 }
-a:hover {
-  text-decoration-color: var(--ph);
-  color: var(--ph);
-}
+a:hover { text-decoration-color: var(--ph); }
 
-p {
-  max-width: 54ch;
-  margin-bottom: 1.2em;
-  font-size: 1rem;
-  line-height: 1.74;
-  color: var(--ink);
+/* ── NAV ── */
+nav { margin-bottom: 46px; padding-bottom: 16px; border-bottom: 1px solid var(--rule-lt);
+      display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.nav-list { list-style: none; display: flex; gap: 0 26px; flex-wrap: wrap; }
+.nav-list a, .nav-home {
+  font-family: var(--mono); font-size: 0.56rem; font-weight: 400; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--ink-3); text-decoration: none;
 }
-p:last-child { margin-bottom: 0; }
+.nav-list a:hover { color: var(--ink); }
+.nav-list a[aria-current="page"] { color: var(--ink-2); }
+.nav-home { color: var(--ink-2); font-weight: 500; display: inline-flex; align-items: center; gap: 8px; }
+.nav-home:hover { color: var(--ink); }
 
+/* ── MARK (family crest — "alive" variant) ── */
+.mark { line-height: 0; }
+.mark svg { display: block; overflow: visible; }
+.mark .spiral { stroke: var(--ink); stroke-width: 1.2; fill: none; stroke-linecap: round; }
+.mark .core { fill: var(--ph); }
+@media (prefers-reduced-motion: no-preference) {
+  .mark .spiral { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.1s cubic-bezier(.6,.02,.2,1) .15s forwards; }
+  .mark .core { opacity: 0; animation: glow 1s ease 1.7s forwards; }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes glow { to { opacity: 1; } }
+
+/* ── HEADER ── */
+header { margin-bottom: 54px; }
+.brandrow { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+.wordmark {
+  font-family: var(--mono); font-size: 0.84rem; font-weight: 500; letter-spacing: 0.34em;
+  text-transform: uppercase; color: var(--ink);
+}
+.hero {
+  font-family: var(--serif); font-size: 1.62rem; font-weight: 400; font-style: normal;
+  line-height: 1.32; letter-spacing: -0.012em; color: var(--ink); max-width: 19ch; margin-bottom: 20px;
+}
+.hero .em { font-style: italic; font-weight: 500; }
+.lede {
+  font-family: var(--serif); font-size: 1.04rem; line-height: 1.7; color: var(--ink-2);
+  max-width: 56ch; margin-bottom: 18px;
+}
+.led-by {
+  font-family: var(--mono); font-size: 0.58rem; font-weight: 300; color: var(--ink-2);
+  letter-spacing: 0.05em; line-height: 1.8;
+}
+.led-by a { color: var(--ink-2); text-decoration: none; }
+.led-by a:hover { color: var(--ph); }
+.pub-status {
+  font-family: var(--mono); font-size: 0.54rem; font-weight: 400; color: var(--ink-3);
+  letter-spacing: 0.16em; text-transform: uppercase; margin: 11px 0 2px;
+}
+.header-meta {
+  font-family: var(--mono); font-size: 0.56rem; font-weight: 300; color: var(--ink-3);
+  letter-spacing: 0.05em; line-height: 1.9; margin-top: 6px;
+  display: flex; flex-wrap: wrap; align-items: baseline;
+}
+.header-meta a { font-family: var(--mono); font-size: 0.56rem; color: var(--ink-2); text-decoration: none; letter-spacing: 0.05em; }
+.header-meta a:hover { color: var(--ph); }
+.meta-sep { margin: 0 8px; color: var(--ink-3); }
+
+/* ── SECTION LABELS (margin-pulled) ── */
+section { margin-bottom: 56px; }
 h2 {
-  font-family: var(--mono);
-  font-size: 0.56rem;
-  font-weight: 400;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  margin-bottom: 22px;
-  line-height: 1.4;
+  font-family: var(--mono); font-size: 0.56rem; font-weight: 400; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--ink-2); margin-bottom: 24px;
+  margin-left: -80px; width: calc(100% + 80px); line-height: 1.4;
 }
+p { max-width: 56ch; margin-bottom: 1.2em; font-size: 1rem; line-height: 1.74; }
+p:last-child { margin-bottom: 0; }
+.sub { color: var(--ink-2); }
 
-.page-header {
-  margin-bottom: 56px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--rule-lt);
+/* ── CLAIM LADDER ── */
+.ladder { list-style: none; max-width: 58ch; border-top: 1px solid var(--rule-lt); }
+.ladder li {
+  display: grid; grid-template-columns: 104px 1fr; gap: 4px 22px;
+  padding: 18px 0 17px; border-bottom: 1px solid var(--rule-lt); position: relative;
 }
-.page-name {
-  font-family: var(--serif);
-  font-size: 0.96rem;
-  font-style: italic;
-  font-weight: 300;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin-bottom: 8px;
+.rung-tag {
+  font-family: var(--mono); font-size: 0.5rem; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; align-self: start; padding-top: 3px;
 }
-.page-descriptor {
-  font-family: var(--mono);
-  font-size: 0.61rem;
-  font-weight: 300;
-  color: var(--ink-2);
-  letter-spacing: 0.03em;
-  line-height: 1.60;
-}
+.rung-tag.v { color: var(--ph); }
+.rung-tag.s { color: var(--ink-3); }
+.rung-tag.p { color: var(--ink-2); }
+.rung-tag.t { color: var(--over); }
+.rung-title { font-family: var(--serif); font-size: 1rem; font-weight: 500; line-height: 1.35; color: var(--ink); }
+.rung-desc { grid-column: 2; font-family: var(--serif); font-size: 0.86rem; line-height: 1.6; color: var(--ink-2); }
+.rung-desc code { font-family: var(--mono); font-size: 0.78em; color: var(--ink); }
 
-section {
-  margin-bottom: 52px;
-}
-section:last-of-type { margin-bottom: 0; }
+/* ── WITNESS TRIAD ── */
+.triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 58ch; }
+.witness { border: 1px solid var(--rule-lt); border-left: 2px solid var(--ph-border); background: var(--ph-dim-2); padding: 16px 16px 15px; }
+.w-sym { font-family: var(--serif); font-size: 1.5rem; font-style: italic; color: var(--ink); line-height: 1; }
+.w-sym .arrow { font-family: var(--mono); font-style: normal; font-size: 0.9rem; color: var(--ph); margin-left: 3px; }
+.w-name { font-family: var(--mono); font-size: 0.52rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); margin: 11px 0 5px; }
+.w-gloss { font-family: var(--serif); font-size: 0.8rem; line-height: 1.5; color: var(--ink-2); }
 
-.ledger { list-style: none; max-width: 54ch; }
-.ledger li {
-  display: flex;
-  flex-direction: column;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--rule-lt);
-  gap: 3px;
+/* ── RESULT CALLOUT (the null) ── */
+.result {
+  max-width: 58ch; border: 1px solid var(--rule-2); border-top: 3px solid var(--ink);
+  background: var(--paper-2); padding: 22px 24px;
 }
-.ledger li:first-child { border-top: 1px solid var(--rule-lt); }
-.l-primary { font-size: 0.9rem; line-height: 1.45; color: var(--ink); }
-.l-secondary {
-  font-size: 0.62rem;
-  font-family: var(--mono);
-  font-weight: 300;
-  color: var(--ink-3);
-  letter-spacing: 0.04em;
-}
+.result .rlabel { font-family: var(--mono); font-size: 0.5rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-2); display: block; margin-bottom: 12px; }
+.result p { font-size: 0.98rem; max-width: none; }
+.result .pull { font-family: var(--serif); font-weight: 500; }
+.band { font-family: var(--mono); font-size: 0.86em; color: var(--ink); white-space: nowrap; }
 
-.contact-block {
-  max-width: 54ch;
-}
-.contact-row {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  padding: 11px 0;
-  border-bottom: 1px solid var(--rule-lt);
-}
-.contact-row:first-child { border-top: 1px solid var(--rule-lt); }
-.contact-label {
-  font-family: var(--mono);
-  font-size: 0.54rem;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  min-width: 80px;
-  flex-shrink: 0;
-}
-.contact-value {
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  font-weight: 400;
-  color: var(--ink-2);
-  text-decoration: none;
-  letter-spacing: 0.02em;
-}
-.contact-value:hover { color: var(--ph); text-decoration: none; }
-a.contact-value { text-decoration: none; }
+/* ── RECEIPTS LEDGER (reproducibility — anti-crank moat) ── */
+.receipts { list-style: none; max-width: 60ch; border-top: 1px solid var(--rule-lt); }
+.receipts li { display: grid; grid-template-columns: 168px 1fr; gap: 4px 18px; padding: 11px 0; border-bottom: 1px solid var(--rule-lt); align-items: baseline; }
+.r-key { font-family: var(--mono); font-size: 0.54rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.r-val { font-family: var(--mono); font-size: 0.66rem; font-weight: 300; color: var(--ink); line-height: 1.6; word-break: break-word; }
+.r-val a { color: var(--ink); text-decoration-color: var(--rule-2); }
+.r-val a:hover { text-decoration-color: var(--ph); }
+.r-hash { color: var(--ink-2); }
 
-footer {
-  margin-top: 88px;
-  padding-top: 20px;
-  border-top: 1px solid var(--rule-lt);
-}
-.footer-text {
-  font-family: var(--mono);
-  font-size: 0.56rem;
-  font-weight: 300;
-  color: var(--ink-2);
-  letter-spacing: 0.05em;
-  line-height: 1.9;
-}
-.footer-text a {
-  font-family: var(--mono);
-  font-size: 0.56rem;
-  font-weight: 300;
-  color: var(--ink-2);
-  text-decoration: none;
-}
+/* ── COLLABORATE / CONTACT ── */
+.contact-list { list-style: none; max-width: 56ch; }
+.contact-list li { padding: 11px 0; border-bottom: 1px solid var(--rule-lt); display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.contact-list li:first-child { border-top: 1px solid var(--rule-lt); }
+.contact-list a { font-family: var(--mono); font-size: 0.62rem; font-weight: 400; color: var(--ink-2); text-decoration: none; letter-spacing: 0.04em; }
+.contact-list a:hover { color: var(--ph); }
+.contact-url { font-family: var(--mono); font-size: 0.56rem; font-weight: 300; color: var(--ink-3); letter-spacing: 0.02em; }
+.contact-arrow { color: var(--ink-3); }
+
+/* ── FOOTER ── */
+footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-lt); }
+.footer-text { font-family: var(--mono); font-size: 0.56rem; font-weight: 300; color: var(--ink-2); letter-spacing: 0.05em; line-height: 1.9; }
+.footer-text a { font-family: var(--mono); font-size: 0.56rem; font-weight: 300; color: var(--ink-2); text-decoration: none; }
 .footer-text a:hover { color: var(--ph); }
 .foot-sep { color: var(--ink-3); }
 
 @media (max-width: 760px) {
   html { font-size: 17px; }
-  .page { margin: 0 auto; padding: 44px 32px 96px; }
+  .page { margin: 0 auto; padding: 46px 32px 96px; }
+  h2 { margin-left: 0; width: 100%; }
+  .hero { font-size: 1.42rem; }
+  .triad { grid-template-columns: 1fr; }
+  .ladder li { grid-template-columns: 92px 1fr; }
+  .receipts li { grid-template-columns: 1fr; gap: 2px; }
 }
 @media (max-width: 460px) {
   html { font-size: 16px; }
-  .page { padding: 36px 20px 80px; }
+  .page { padding: 34px 20px 80px; }
+  .nav-list { gap: 12px 18px; }
+  .header-meta { flex-direction: column; }
+  .meta-sep { display: none; }
 }
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchProject",
+  "name": "Loopzero",
+  "url": "https://loopzero.org/",
+  "description": "An independent research program on early-warning signatures in recursive systems: a formally specified warning criterion, a conditional telemetry bridge (G, p, δ), and a matched-false-positive benchmark on frozen public data.",
+  "founder": {
+    "@type": "Person",
+    "name": "David Mullett",
+    "url": "https://davidmullett.com/",
+    "identifier": "https://orcid.org/0009-0004-2543-1664"
+  }
+}
+</script>
 </head>
+
 <body style="background:#f3f0e7 !important; color:#1a1710 !important;">
 <div class="page">
-
 <main>
 
-<div class="page-header">
-  <div class="mark">
-    <svg id="spiralSvgLoopzero" width="42" height="42" viewBox="0 0 80 80"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-label="Loopzero mark" role="img"></svg>
+<nav aria-label="Site navigation">
+  <a class="nav-home" href="index.html" aria-current="page">
+    <span class="mark mark-sm" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-label="Loopzero mark" role="img">
+        <path class="spiral" style="animation:none;stroke-dashoffset:0;stroke-width:3.4" d="M40,40 Q40,8 66,14 Q82,25 80,48 Q74,69 50,74 Q23,78 9,56 Q-4,34 8,14 Q20,-4 42,2 Q66,8 76,30 Q84,54 70,68 Q54,82 34,80 Q14,78 6,62 Q-2,46 8,34 Q18,22 34,20 Q52,18 60,34 Q68,50 58,62 Q48,74 36,70 Q24,66 22,54 Q20,44 28,38 Q36,32 44,36 Q52,40 50,48 Q48,56 42,54 Q38,52 38,48 Q38,44 41,42"/>
+        <circle class="core" style="opacity:1" cx="41" cy="42" r="3.6"/>
+      </svg>
+    </span>
+    Loopzero
+  </a>
+  <ul class="nav-list">
+    <li><a href="index.html" aria-current="page">Research</a></li>
+    <li><a href="paper.html">Paper</a></li>
+    <li><a href="https://davidmullett.com/about.html" target="_blank" rel="noopener">About</a></li>
+    <li><a href="mailto:d@loopzero.org">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <div class="brandrow">
+    <span class="mark" aria-hidden="true">
+      <svg width="46" height="46" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-label="Loopzero mark" role="img">
+        <path class="spiral" pathLength="1" style="stroke-width:1.5" d="M40,40 Q40,8 66,14 Q82,25 80,48 Q74,69 50,74 Q23,78 9,56 Q-4,34 8,14 Q20,-4 42,2 Q66,8 76,30 Q84,54 70,68 Q54,82 34,80 Q14,78 6,62 Q-2,46 8,34 Q18,22 34,20 Q52,18 60,34 Q68,50 58,62 Q48,74 36,70 Q24,66 22,54 Q20,44 28,38 Q36,32 44,36 Q52,40 50,48 Q48,56 42,54 Q38,52 38,48 Q38,44 41,42"/>
+        <circle class="core" cx="41" cy="42" r="3.4"/>
+      </svg>
+    </span>
+    <span class="wordmark">Loopzero</span>
   </div>
 
-  <div class="page-name">Loopzero</div>
-  <div class="page-descriptor">A theorem-grounded research program on warning criteria for recursive feedback systems.</div>
-</div>
+  <h1 class="hero">A falsifiable test for <span class="em">collapse-warning claims</span> in recursive systems.</h1>
 
-
-<section>
-  <h2>Program</h2>
-
-  <p>
-    Loopzero is a research program developing theorem-grounded warning
-    criteria for collapse in recursive feedback systems. The work pairs a
-    formal component, machine-checked in Lean&nbsp;4, with empirical
-    evaluation of corresponding detection criteria under matched
-    alert-budget protocols.
+  <p class="lede">
+    A formally specified warning criterion, evaluated under a locked
+    false-positive contract on frozen public market and recommender data.
+    The result is reported in full — including where no detector is
+    accepted under it.
   </p>
 
+  <div class="led-by">An independent research program led by <a href="https://davidmullett.com/" target="_blank" rel="noopener">David&nbsp;Mullett</a>.</div>
+
+  <!-- Add review status here when true, e.g. "Preprint · June 2026 · under review at PNAS Nexus" -->
+  <div class="pub-status">Preprint · June 2026</div>
+
+  <div class="header-meta">
+    <a href="paper.html">Read the paper</a>
+    <span class="meta-sep">·</span>
+    <a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">Artifact &amp; code</a>
+    <span class="meta-sep">·</span>
+    <a href="https://orcid.org/0009-0004-2543-1664" target="_blank" rel="noopener">ORCID</a>
+  </div>
+</header>
+
+<!-- THE PROGRAM -->
+<section>
+  <h2>The program</h2>
   <p>
-    The program is led by <a href="https://davidmullett.com">David Mullett</a>,
-    an independent researcher. Selected Lean artifacts and public research
-    materials will be linked here on publication.
+    Recursive systems — markets, recommenders, model-training loops — can enter
+    a regime where local updates stay coherent while real forward progress
+    becomes inaccessible. Loopzero asks one bounded question: does that regime
+    leave an <em>observable footprint before</em> overt failure, and can a
+    warning built on that footprint survive a fair test?
+  </p>
+  <p>
+    This sits in the lineage of early-warning signals for critical transitions —
+    the variance, autocorrelation, and critical-slowing-down precursors developed
+    by Scheffer, Dakos, and others — but starts from a different object: a formally
+    specified no-progress obstruction rather than a statistical precursor, and
+    holds it to the matched-false-positive discipline that the same literature's
+    skeptics have rightly demanded.
+  </p>
+  <p class="sub">
+    The claim boundary is specified in Lean&nbsp;4. The bridge from that formal
+    object to real telemetry is treated as a conditional, falsifiable empirical
+    question — not a verified one. Motivation and result are kept in separate
+    registers throughout.
   </p>
 </section>
 
-
+<!-- CLAIM LADDER -->
 <section>
-  <h2>Status</h2>
-
-  <ul class="ledger">
+  <h2>Claim ladder</h2>
+  <ul class="ladder">
     <li>
-      <span class="l-primary">A theorem-grounded warning criterion for collapse in recursive systems</span>
-      <span class="l-secondary">Preprint in preparation · formal and domain review in progress</span>
+      <span class="rung-tag v">Verified</span>
+      <span class="rung-title">Formal obstruction</span>
+      <span class="rung-desc">A minimal no-progress obstruction over preorders, machine-checked in Lean&nbsp;4 (<code>collapse_via_progresscycle_public</code>). Intentionally elementary — its job is to fix the claim boundary, not to contribute to formal methods.</span>
     </li>
     <li>
-      <span class="l-primary">USPTO Provisional Application 64/042,661</span>
-      <span class="l-secondary">Filed April 2026 · Loopzero, Inc.</span>
+      <span class="rung-tag s">Stated</span>
+      <span class="rung-title">Conditional telemetry bridge</span>
+      <span class="rung-desc">An assumed measurement map from system state to three observable witnesses — gain (G), recursive persistence (p), diversity (δ). Stated as an assumption, tested empirically, never claimed as verified.</span>
+    </li>
+    <li>
+      <span class="rung-tag p">Protocol</span>
+      <span class="rung-title">Matched false-positive contract</span>
+      <span class="rung-desc">Detectors are compared at a single locked alert budget — the equal-false-positive band <span class="band">[0.03, 0.07]</span> — rather than at convenient family-specific thresholds.</span>
+    </li>
+    <li>
+      <span class="rung-tag t">Tested</span>
+      <span class="rung-title">Benchmark outcomes</span>
+      <span class="rung-desc">Frozen public benchmarks in two domains. Outcome, including non-acceptance, reported in full. See below.</span>
     </li>
   </ul>
 </section>
 
-
+<!-- WITNESS TRIAD -->
 <section>
-  <h2>Contact</h2>
-
-  <div class="contact-block">
-    <div class="contact-row">
-      <span class="contact-label">Email</span>
-      <a class="contact-value" href="mailto:d@loopzero.org">d@loopzero.org</a>
+  <h2>The witnesses</h2>
+  <div class="triad">
+    <div class="witness">
+      <div class="w-sym">G<span class="arrow">↑</span></div>
+      <div class="w-name">Gain</div>
+      <div class="w-gloss">Perturbation is amplified rather than damped.</div>
     </div>
-    <div class="contact-row">
-      <span class="contact-label">Principal</span>
-      <a class="contact-value" href="https://davidmullett.com">davidmullett.com</a>
+    <div class="witness">
+      <div class="w-sym">p<span class="arrow">↑</span></div>
+      <div class="w-name">Persistence</div>
+      <div class="w-gloss">Recent internal state increasingly determines what comes next.</div>
+    </div>
+    <div class="witness">
+      <div class="w-sym">δ<span class="arrow">↓</span></div>
+      <div class="w-name">Diversity</div>
+      <div class="w-gloss">The accessible range of trajectories contracts.</div>
     </div>
   </div>
 </section>
 
-</main>
+<!-- THE RESULT (null, blunt) -->
+<section>
+  <h2>The result</h2>
+  <div class="result">
+    <span class="rlabel">Reported in full</span>
+    <p class="pull">
+      Across both flagship benchmarks — a segmented markets family
+      (Volmageddon 2018, COVID 2020) and a MovieLens-25M recommender replay —
+      no tested detector reached an accepted operating point under the locked
+      band <span class="band">[0.03, 0.07]</span>.
+    </p>
+    <p>
+      That includes the standard early-warning comparators (variance EWS, AC1,
+      CUSUM, Page-Hinkley, matrix profile, permutation entropy)
+      <em>and</em> Loopzero's own pre-registered detector. What survives is the
+      directional G/p/δ bridge and a falsifiable benchmark framework. Binary
+      operational-detector acceptance remains open. A digitized LLM
+      training-loop trajectory (Shumailov et&nbsp;al., 2024) is reported only as
+      a directional-consistency check — not as a third benchmark.
+    </p>
+  </div>
+</section>
 
+<!-- REPRODUCIBILITY RECEIPTS -->
+<section>
+  <h2>Reproducibility</h2>
+  <ul class="receipts">
+    <li><span class="r-key">Repository</span><span class="r-val"><a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">github.com/davidmullett/loopzero-paper-public</a> <span class="r-hash">· commit 3b8c01c6</span></span></li>
+    <li><span class="r-key">Lean toolchain</span><span class="r-val">Lean v4.30.0-rc2 · Mathlib <span class="r-hash">3ba1ec58</span> · builds clean under <code>lake build</code></span></li>
+    <li><span class="r-key">Axiom audit</span><span class="r-val">3 obstruction theorems: no axiom dependencies · 2 bridge theorems: propext, Classical.choice, Quot.sound only</span></li>
+    <li><span class="r-key">Markets benchmark</span><span class="r-val">volmageddon_covid_public_v2 · 38 controls + 16 events · FP grid 1/38</span></li>
+    <li><span class="r-key">Recsys benchmark</span><span class="r-val">movielens25m_recursive_frontier_public_v1 · 40,339 user clusters · h=50</span></li>
+    <li><span class="r-key">Source archive</span><span class="r-val">MovieLens-25M · SHA-256 <span class="r-hash">8b21cfb7…</span> · MD5-verified vs GroupLens</span></li>
+    <li><span class="r-key">Engine</span><span class="r-val">item-item replay v1.0.0 · hash <span class="r-hash">56c1cff225d60c09</span></span></li>
+    <li><span class="r-key">Detector</span><span class="r-val">pre-registered q=95, k=3 · band [0.03, 0.07]</span></li>
+    <li><span class="r-key">Seeds</span><span class="r-val">42 (segment grain) · 43 (scenario grain) · bootstrap 10,000/cell</span></li>
+  </ul>
+</section>
+
+<!-- COLLABORATE -->
+<section>
+  <h2>Collaborate</h2>
+  <p class="sub">
+    The point of freezing the benchmarks and publishing the hashes is to make
+    this easy to break. Replication attempts, harder negative controls, and
+    extensions to new domains under the same matched-false-positive contract
+    are all welcome — especially from people working on early-warning signals,
+    recommender feedback loops, formal methods, and model collapse.
+  </p>
+  <ul class="contact-list">
+    <li>
+      <a href="mailto:d@loopzero.org">Replication · collaboration · review <span class="contact-arrow">→</span></a>
+      <span class="contact-url">d@loopzero.org</span>
+    </li>
+  </ul>
+</section>
+
+</main>
 
 <footer>
   <div class="footer-text">
     loopzero.org
     <span class="foot-sep">&nbsp;·&nbsp;</span>
-    <a href="https://davidmullett.com" target="_blank" rel="noopener">davidmullett.com</a>
+    <a href="https://davidmullett.com/" target="_blank" rel="noopener">davidmullett.com</a>
+    <span class="foot-sep">&nbsp;·&nbsp;</span>
+    <a href="https://orcid.org/0009-0004-2543-1664" target="_blank" rel="noopener">ORCID&nbsp;0009-0004-2543-1664</a>
+    <span class="foot-sep">&nbsp;·&nbsp;</span>
+    <a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
 
 </div>
-
-<script>
-(function() {
-  const svg = document.getElementById('spiralSvgLoopzero');
-  if (!svg) return;
-  const ns = 'http://www.w3.org/2000/svg';
-
-  const path = document.createElementNS(ns, 'path');
-  path.setAttribute('fill', 'none');
-  path.setAttribute('stroke', '#1a1814');
-  path.setAttribute('stroke-width', '1.2');
-  path.setAttribute('stroke-linecap', 'round');
-  path.setAttribute('d', `M40,40 Q40,8 66,14 Q82,25 80,48 Q74,69 50,74 Q23,78 9,56 Q-4,34 8,14 Q20,-4 42,2 Q66,8 76,30 Q84,54 70,68 Q54,82 34,80 Q14,78 6,62 Q-2,46 8,34 Q18,22 34,20 Q52,18 60,34 Q68,50 58,62 Q48,74 36,70 Q24,66 22,54 Q20,44 28,38 Q36,32 44,36 Q52,40 50,48 Q48,56 42,54 Q38,52 38,48 Q38,44 41,42`);
-  svg.appendChild(path);
-
-  const dot = document.createElementNS(ns, 'circle');
-  dot.setAttribute('cx', '41');
-  dot.setAttribute('cy', '42');
-  dot.setAttribute('r', '2');
-  dot.setAttribute('fill', '#1a1814');
-  svg.appendChild(dot);
-})();
-</script>
-
 </body>
 </html>
