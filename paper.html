@@ -172,35 +172,33 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
 <section>
   <h2>Abstract</h2>
   <p>
-    Recursive systems can enter collapse-like regimes before overt failure is
-    visible: amplification, endogenous recycling, and contraction of accessible
-    trajectories reinforce one another while local updates remain coherent. The
-    paper defines a warning criterion around a minimal <em class="term">no-progress
-    obstruction</em>, with the claim boundary specified in Lean&nbsp;4, and
-    instantiates it through three telemetry witnesses — gain (G), recursive
-    persistence (p), and diversity (δ). Under stated assumptions, the obstruction
-    motivates a testable prediction: pre-collapse regimes should show rising
-    amplification, rising recursive persistence, and declining diversity.
+    Recursive systems can enter collapse-like regimes — self-reinforcing
+    amplification, persistent recursion, and narrowing diversity that mask
+    accelerating internal degradation — before overt failure becomes visible.
+    We introduce Loopzero, a claim-bounded benchmark framework for testing
+    whether recursive failures follow a directional telemetry pattern: rising
+    gain (G), recursive persistence (p), and declining diversity (δ). The claim
+    boundary is specified in Lean; the Lean artifact does not verify real
+    telemetry, benchmark validity, or detector performance.
   </p>
   <p>
-    The prediction is evaluated on two frozen public benchmark domains — a
-    canonical segmented markets family (Volmageddon 2018, COVID 2020) and a
-    50-step MovieLens-25M recommender replay — under a matched false-positive
-    contract that compares detectors at the same alert budget rather than at
-    arbitrary thresholds. Under the locked equal-false-positive band
-    <span class="band">[0.03, 0.07]</span>, <strong>no tested comparator
-    configuration and not the pre-registered Loopzero quantile detector achieved
-    an accepted operating point</strong> on either benchmark. Directional witness
-    summaries aligned on the canonical recommender benchmark and on the late-window
-    markets summary. A third domain — recursive LLM training-loop collapse
-    (Shumailov et&nbsp;al., 2024) — is reported as secondary directional
-    corroboration only.
+    We evaluate the bridge on two frozen public-artifact benchmarks: a segmented
+    public-markets benchmark (Volmageddon 2018, COVID MWCB 2020) and a
+    MovieLens-25M offline deterministic recommender replay. Detectors are
+    evaluated under a locked equal-false-positive contract (FP ∈
+    <span class="band">[0.03, 0.07]</span>, pre-registered) so all configurations
+    face the same alert budget. <strong>Neither tested standard comparators nor
+    Loopzero's pre-registered quantile detector achieved an accepted operating
+    point.</strong> Directional witness alignment held on both canonical
+    benchmarks, with adjacent-horizon and row-level limitations disclosed.
+    Digitized Shumailov et&nbsp;al. (2024) LLM training-loop trajectories are
+    directionally consistent with the pattern; matched-FP evaluation in that
+    domain is deferred.
   </p>
-  <p class="sub">
-    Reported as a falsifiable benchmark for recursive-collapse warnings: the
-    directional G/p/δ bridge is supported, while binary operational-detector
-    acceptance remains open for threshold-path calibration and further detector
-    development.
+  <p>
+    The contribution is a reproducible, falsifiable benchmark framework for
+    evaluating recursive-collapse warning claims under an explicit alert-budget
+    contract — non-acceptance reported as a first-class scientific outcome.
   </p>
 </section>
 
