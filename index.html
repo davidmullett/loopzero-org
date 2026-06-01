@@ -105,7 +105,7 @@ header { margin-bottom: 54px; }
 }
 .hero {
   font-family: var(--serif); font-size: 1.62rem; font-weight: 400; font-style: normal;
-  line-height: 1.32; letter-spacing: -0.012em; color: var(--ink); max-width: 19ch; margin-bottom: 20px;
+  line-height: 1.32; letter-spacing: -0.012em; color: var(--ink); max-width: 19ch; margin-bottom: 20px; text-wrap: balance;
 }
 .hero .em { font-style: italic; font-weight: 500; }
 .lede {
@@ -271,13 +271,12 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
     <span class="wordmark">Loopzero</span>
   </div>
 
-  <h1 class="hero">A falsifiable test for <span class="em">collapse-warning claims</span> in recursive systems.</h1>
+  <h1 class="hero">A falsifiable test for <span class="em">collapse-warning claims</span> in recursive&nbsp;systems.</h1>
 
   <p class="lede">
-    A formally specified warning criterion, evaluated under a locked
-    false-positive contract on frozen public market and recommender data.
-    The result is reported in full — including where no detector is
-    accepted under it.
+    A matched-false-positive benchmark, evaluated on frozen public market and
+    recommender data, with the claim boundary specified in Lean. The result is
+    reported in full — including where no detector is accepted under it.
   </p>
 
   <div class="led-by">An independent research program led by <a href="https://davidmullett.com/" target="_blank" rel="noopener">David&nbsp;Mullett</a>.</div>
@@ -396,7 +395,7 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
 <section>
   <h2>Reproducibility</h2>
   <ul class="receipts">
-    <li><span class="r-key">Repository</span><span class="r-val"><a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">github.com/davidmullett/loopzero-paper-public</a> <span class="r-hash">· commit 3b8c01c6</span></span></li>
+    <li><span class="r-key">Repository</span><span class="r-val"><a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">github.com/davidmullett/loopzero-paper-public</a> <span class="r-hash">· release lean-v1.0</span></span></li>
     <li><span class="r-key">Lean toolchain</span><span class="r-val">Lean v4.30.0-rc2 · Mathlib <span class="r-hash">3ba1ec58</span> · builds clean under <code>lake build</code></span></li>
     <li><span class="r-key">Axiom audit</span><span class="r-val">3 obstruction theorems: no axiom dependencies · 2 bridge theorems: propext, Classical.choice, Quot.sound only</span></li>
     <li><span class="r-key">Markets benchmark</span><span class="r-val">volmageddon_covid_public_v2 · 38 controls + 16 events · FP grid 1/38</span></li>
