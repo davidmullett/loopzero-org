@@ -94,8 +94,9 @@ nav { margin-bottom: 46px; padding-bottom: 16px; border-bottom: 1px solid var(--
 .mark svg { display: block; overflow: visible; }
 .mark .spiral { stroke: var(--ink); stroke-width: 1.2; fill: none; stroke-linecap: round; }
 .mark .core { fill: var(--ph); }
-.mark .spiral.spiral-static { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; stroke-width: 3.4; }
+.mark .spiral.spiral-static { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; }
 .mark .core.core-static { animation: none; opacity: 1; }
+.mark-sm .spiral { stroke-width: 3.4; }
 @media (prefers-reduced-motion: no-preference) {
   .mark .spiral { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.1s cubic-bezier(.6,.02,.2,1) .15s forwards; }
   .mark .core { opacity: 0; animation: glow 1s ease 1.7s forwards; }
