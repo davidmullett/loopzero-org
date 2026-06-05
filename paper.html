@@ -107,6 +107,17 @@ code { font-family:var(--mono); font-size:0.82em; color:var(--ink); }
   padding:16px 18px; font-family:var(--mono); font-size:var(--t-meta); line-height:1.7; color:var(--ink-2);
   white-space:pre-wrap; word-break:break-word; }
 
+.receipts { list-style:none; max-width:58ch; border-top:1px solid var(--rule-lt); }
+.receipts li { display:grid; grid-template-columns:168px 1fr; gap:4px 18px; padding:11px 0;
+  border-bottom:1px solid var(--rule-lt); align-items:baseline; }
+.r-key { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:400; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--ink-3); }
+.r-val { font-family:var(--mono); font-size:var(--t-meta); font-weight:300; color:var(--ink-2);
+  line-height:1.7; word-break:break-word; }
+.r-val a { color:var(--ink-2); text-decoration-color:var(--rule-2); }
+.r-val a:hover { text-decoration-color:var(--ph-d); }
+.r-hash { color:var(--ink-3); }
+
 footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt); }
 .footer-text { font-family:var(--mono); font-size:var(--t-label); font-weight:300; color:var(--ink-2);
   letter-spacing:0.05em; line-height:1.9; }
@@ -114,7 +125,7 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
 .footer-text a:hover { color:var(--ph-d); }
 .foot-sep { color:var(--ink-3); }
 
-@media (max-width:760px){ html{font-size:17px;} .page{margin:0 auto;padding:46px 32px 96px;} h2{margin-left:0;width:100%;} .title{font-size:var(--t-title-sm);} }
+@media (max-width:760px){ html{font-size:17px;} .page{margin:0 auto;padding:46px 32px 96px;} h2{margin-left:0;width:100%;} .title{font-size:var(--t-title-sm);} .receipts li{grid-template-columns:1fr;gap:2px;} }
 @media (max-width:460px){ html{font-size:16px;} .page{padding:34px 20px 80px;} .nav-list{gap:12px 18px;} }
 </style>
 
@@ -262,6 +273,22 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
   primaryClass  = {eess.SY},
   url           = {https://arxiv.org/abs/2606.00329}
 }</div>
+</section>
+
+<!-- REPRODUCIBILITY & ARTIFACTS (relocated from index.html — receipts ledger, verbatim) -->
+<section id="reproducibility">
+  <h2>Reproducibility &amp; artifacts</h2>
+  <ul class="receipts">
+    <li><span class="r-key">Repository</span><span class="r-val"><a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">github.com/davidmullett/loopzero-paper-public</a> <span class="r-hash">· release lean-v1.0</span></span></li>
+    <li><span class="r-key">Lean toolchain</span><span class="r-val">Lean v4.30.0-rc2 · Mathlib <span class="r-hash">3ba1ec58</span> · builds clean under <code>lake build</code></span></li>
+    <li><span class="r-key">Axiom audit</span><span class="r-val">3 obstruction theorems: no axiom dependencies · 2 bridge theorems: propext, Classical.choice, Quot.sound only</span></li>
+    <li><span class="r-key">Markets benchmark</span><span class="r-val">volmageddon_covid_public_v2 · 38 controls + 16 events · FP grid 1/38</span></li>
+    <li><span class="r-key">Recsys benchmark</span><span class="r-val">movielens25m_recursive_frontier_public_v1 · 40,339 user clusters · h=50</span></li>
+    <li><span class="r-key">Source archive</span><span class="r-val">MovieLens-25M · SHA-256 <span class="r-hash">8b21cfb7…</span> · MD5-verified vs GroupLens</span></li>
+    <li><span class="r-key">Engine</span><span class="r-val">item-item replay v1.0.0 · hash <span class="r-hash">56c1cff225d60c09</span></span></li>
+    <li><span class="r-key">Detector</span><span class="r-val">pre-registered q=95, k=3 · band [0.03, 0.07]</span></li>
+    <li><span class="r-key">Seeds</span><span class="r-val">42 (segment grain) · 43 (scenario grain) · bootstrap 10,000/cell</span></li>
+  </ul>
 </section>
 
 </main>
