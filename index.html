@@ -276,8 +276,7 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
 
   <p class="lede">
     A matched-false-positive benchmark, evaluated on frozen public market and
-    recommender data, with the claim boundary specified in Lean 4. The result is
-    reported in full — including where no detector is accepted under it.
+    recommender data, with the claim boundary specified in Lean 4.
   </p>
 
   <div class="led-by">An independent research program led by <a href="https://davidmullett.com/" target="_blank" rel="noopener">David&nbsp;Mullett</a>.</div>
@@ -392,20 +391,13 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
   </div>
 </section>
 
-<!-- REPRODUCIBILITY POINTER (full ledger lives on paper.html) -->
-<p class="sub repro-pointer">
-  Full reproducibility — toolchain, benchmark hashes, seeds, and axiom audit —
-  is on <a href="paper.html">the paper page</a>.
-</p>
-
 <!-- WHAT COMES NEXT -->
 <section>
   <h2>What comes next</h2>
   <p>
-    The benchmark returns a null: under the locked false-positive band, no
-    tested detector is accepted. That is the starting condition, not the
-    conclusion — and the point of freezing the benchmarks and publishing the
-    hashes is to make it easy to break.
+    The null is the starting condition, not the conclusion — and the point of
+    freezing the benchmarks and publishing the hashes is to make it easy to
+    break.
   </p>
   <p>
     The next round hardens the conditions the null was measured under:
