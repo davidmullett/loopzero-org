@@ -18,14 +18,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Loopzero">
 <meta property="og:url" content="https://loopzero.org/">
-<meta property="og:title" content="Loopzero — a falsifiable test for collapse-warning claims in recursive systems">
+<meta property="og:title" content="Loopzero — a falsifiable benchmark for collapse-warning claims in recursive systems">
 <meta property="og:description" content="An independent research program testing collapse-warning claims in recursive systems. A claim boundary specified in Lean 4, paired with a matched-false-positive benchmark on frozen public market and recommender data. The null is reported in full.">
 <meta property="og:image" content="https://loopzero.org/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Loopzero — a falsifiable test for collapse-warning claims in recursive systems">
+<meta name="twitter:title" content="Loopzero — a falsifiable benchmark for collapse-warning claims in recursive systems">
 <meta name="twitter:description" content="Testing collapse-warning claims in recursive systems. A claim boundary in Lean 4, paired with a matched-false-positive benchmark on frozen public data.">
 <meta name="twitter:image" content="https://loopzero.org/og-image.png">
 
@@ -272,7 +272,7 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
     <span class="wordmark">Loopzero</span>
   </div>
 
-  <h1 class="hero">A falsifiable test for <span class="em">collapse-warning claims</span> in recursive&nbsp;systems.</h1>
+  <h1 class="hero">A falsifiable benchmark for <span class="em">collapse-warning claims</span> in recursive&nbsp;systems.</h1>
 
   <p class="lede">
     A matched-false-positive benchmark, evaluated on frozen public market and
@@ -297,7 +297,8 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
 <section>
   <h2>The program</h2>
   <p>
-    Recursive systems — markets, recommenders, model-training loops — can enter
+    Recursive systems — markets and recommenders in the current benchmarks, with
+    model-training loops as a secondary directional check — can enter
     a regime where local updates stay coherent while real forward progress
     becomes inaccessible. Loopzero asks one bounded question: does that regime
     leave an <em>observable footprint before</em> overt failure, and can a
@@ -395,7 +396,7 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
 <section>
   <h2>What comes next</h2>
   <p>
-    The null is the starting condition, not the conclusion — and the point of
+    Non-acceptance is the starting condition, not the conclusion — and the point of
     freezing the benchmarks and publishing the hashes is to make it easy to
     break.
   </p>
@@ -411,8 +412,9 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
     reviewers — formal-methods contributors to extend the Lean claim boundary,
     recommender-systems and market-microstructure researchers to pressure-test
     the empirical bridge, and early-warning-signal researchers working the
-    same problem from other directions. The benchmark and its data are public
-    so the critique can be specific.
+    same problem from other directions. The benchmark artifacts, code, frozen
+    outputs, and reproducibility anchors are public where licensing allows, so
+    the critique can be specific.
   </p>
   <p class="sub">
     If the framework holds up to external replication and the benchmark is
