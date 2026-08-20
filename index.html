@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="only light">
 <meta name="theme-color" content="#f3f0e7">
-<meta name="description" content="An independent research program testing collapse-warning claims in recursive systems. A claim boundary specified in Lean 4, paired with a matched-false-positive benchmark on frozen public market and recommender data. The null is reported in full.">
+<title>Loopzero — instrument validity for recursive systems</title>
+<meta name="description" content="An independent research program on whether the instruments used to measure recursive systems can be trusted. A benchmark pathology, the protocol that catches it, and a pre-registered null — reported in full.">
 
 <link rel="canonical" href="https://loopzero.org/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -18,15 +19,15 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Loopzero">
 <meta property="og:url" content="https://loopzero.org/">
-<meta property="og:title" content="Loopzero — a falsifiable benchmark for collapse-warning claims in recursive systems">
-<meta property="og:description" content="An independent research program testing collapse-warning claims in recursive systems. A claim boundary specified in Lean 4, paired with a matched-false-positive benchmark on frozen public market and recommender data. Non-acceptance is reported in full.">
+<meta property="og:title" content="Loopzero — instrument validity for recursive systems">
+<meta property="og:description" content="An independent research program on whether the instruments used to measure recursive systems can be trusted. A benchmark pathology, the protocol that catches it, and a pre-registered null — reported in full.">
 <meta property="og:image" content="https://loopzero.org/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Loopzero — a falsifiable benchmark for collapse-warning claims in recursive systems">
-<meta name="twitter:description" content="Testing collapse-warning claims in recursive systems. A claim boundary in Lean 4, paired with a matched-false-positive benchmark on frozen public data.">
+<meta name="twitter:title" content="Loopzero — instrument validity for recursive systems">
+<meta name="twitter:description" content="An instrument that cannot record a failure will report health. A benchmark pathology, the protocol that catches it, and a pre-registered null — reported in full.">
 <meta name="twitter:image" content="https://loopzero.org/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -128,6 +129,10 @@ header { margin-bottom: 84px; }
 }
 .led-by a { color: var(--ink-2); text-decoration: none; }
 .led-by a:hover { color: var(--ph-d); }
+.paper-cite {
+  font-family: var(--serif); font-size: var(--t-aux); color: var(--ink-2); line-height: 1.6; margin-top: 4px;
+}
+.paper-cite em { font-style: italic; color: var(--ink); }
 .pub-status {
   font-family: var(--mono); font-size: var(--t-label-xs); font-weight: 400; color: var(--ink-2);
   letter-spacing: 0.16em; text-transform: uppercase; margin: 11px 0 2px;
@@ -151,8 +156,9 @@ h2 {
 p { max-width: 56ch; margin-bottom: 1.2em; font-size: var(--t-body); line-height: 1.74; }
 p:last-child { margin-bottom: 0; }
 .sub { color: var(--ink-2); }
+strong { font-weight: 500; color: var(--ink); }
 
-/* ── CLAIM LADDER ── */
+/* ── RULE-SEPARATED GRID LIST (protocol checks · open problems) ── */
 .ladder { list-style: none; max-width: 58ch; border-top: 1px solid var(--rule-lt); }
 .ladder li {
   display: grid; grid-template-columns: 104px 1fr; gap: 4px 22px;
@@ -160,23 +166,11 @@ p:last-child { margin-bottom: 0; }
 }
 .rung-tag {
   font-family: var(--mono); font-size: var(--t-label-xs); font-weight: 500; letter-spacing: 0.2em;
-  text-transform: uppercase; align-self: start; padding-top: 3px;
+  text-transform: uppercase; color: var(--ink-3); align-self: start; padding-top: 3px;
 }
-.rung-tag.v { color: var(--ph-d); }
-.rung-tag.s { color: var(--ink-3); }
-.rung-tag.p { color: var(--ink-2); }
-.rung-tag.t { color: var(--ink); }
 .rung-title { font-family: var(--serif); font-size: var(--t-body); font-weight: 500; line-height: 1.35; color: var(--ink); }
 .rung-desc { grid-column: 2; font-family: var(--serif); font-size: var(--t-aux); line-height: 1.6; color: var(--ink-2); }
 .rung-desc code { font-family: var(--mono); font-size: 0.78em; color: var(--ink); }
-
-/* ── WITNESS TRIAD ── */
-.triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 58ch; }
-.witness { border: 1px solid var(--rule-lt); border-left: 2px solid var(--ph-border); background: var(--ph-dim-2); padding: 16px 16px 15px; }
-.w-sym { font-family: var(--serif); font-size: var(--t-hero-sm); font-style: italic; color: var(--ink); line-height: 1; }
-.w-sym .arrow { font-family: var(--mono); font-style: normal; font-size: var(--t-aux); color: var(--ph-d); margin-left: 3px; }
-.w-name { font-family: var(--mono); font-size: var(--t-label-xs); font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); margin: 11px 0 5px; }
-.w-gloss { font-family: var(--serif); font-size: var(--t-aux); line-height: 1.5; color: var(--ink-2); }
 
 /* ── RESULT CALLOUT (the null) ── */
 .result {
@@ -188,7 +182,20 @@ p:last-child { margin-bottom: 0; }
 .result .pull { font-family: var(--serif); font-weight: 500; }
 .band { font-family: var(--mono); font-size: 0.86em; color: var(--ink); white-space: nowrap; }
 
-/* ── WHAT COMES NEXT / CONTACT ── */
+/* ── RECEIPTS LEDGER (the record — shared with paper.html) ── */
+.receipts { list-style: none; max-width: 58ch; border-top: 1px solid var(--rule-lt); }
+.receipts li { display: grid; grid-template-columns: 168px 1fr; gap: 4px 18px; padding: 11px 0;
+  border-bottom: 1px solid var(--rule-lt); align-items: baseline; }
+.r-key { font-family: var(--mono); font-size: var(--t-label-xs); font-weight: 400; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-3); }
+.r-val { font-family: var(--mono); font-size: var(--t-meta); font-weight: 300; color: var(--ink-2);
+  line-height: 1.7; word-break: break-word; }
+.r-val em { font-family: var(--serif); font-size: 1.12em; font-style: italic; color: var(--ink); }
+.r-val a { color: var(--ink-2); text-decoration-color: var(--rule-2); }
+.r-val a:hover { text-decoration-color: var(--ph-d); }
+.r-hash { color: var(--ink-3); }
+
+/* ── CONTACT ── */
 .contact-list { list-style: none; max-width: 56ch; }
 .contact-list li { padding: 11px 0; border-bottom: 1px solid var(--rule-lt); display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .contact-list li:first-child { border-top: 1px solid var(--rule-lt); }
@@ -209,8 +216,8 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
   .page { margin: 0 auto; padding: 46px 32px 96px; }
   h2 { margin-left: 0; width: 100%; }
   .hero { font-size: var(--t-hero-sm); }
-  .triad { grid-template-columns: 1fr; }
   .ladder li { grid-template-columns: 92px 1fr; }
+  .receipts li { grid-template-columns: 1fr; gap: 2px; }
   header, section, .repro-pointer { margin-bottom: 64px; }
 }
 @media (max-width: 460px) {
@@ -228,7 +235,7 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
   "@type": "ResearchProject",
   "name": "Loopzero",
   "url": "https://loopzero.org/",
-  "description": "An independent research program testing collapse-warning claims in recursive systems. A claim boundary specified in Lean 4, paired with a matched-false-positive benchmark on frozen public market and recommender data. The null is reported in full.",
+  "description": "An independent research program on whether the instruments used to measure recursive systems can be trusted. A benchmark pathology, the protocol that catches it, and a pre-registered null — reported in full.",
   "founder": {
     "@type": "Person",
     "name": "David Mullett",
@@ -254,8 +261,9 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
     Loopzero
   </a>
   <ul class="nav-list">
-    <li><a href="index.html" aria-current="page">Research</a></li>
-    <li><a href="paper.html">Paper</a></li>
+    <li><a href="https://github.com/davidmullett/loopzero-paper-public/blob/main/manuscript_shadow_classes/build/paper_main.pdf" target="_blank" rel="noopener">Manuscript</a></li>
+    <li><a href="#protocol">Protocol</a></li>
+    <li><a href="#record">Record</a></li>
     <li><a href="mailto:d@loopzero.org">Contact</a></li>
   </ul>
 </nav>
@@ -272,20 +280,24 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
     <span class="wordmark">Loopzero</span>
   </div>
 
-  <h1 class="hero">A falsifiable benchmark for <span class="em">collapse-warning claims</span> in recursive&nbsp;systems.</h1>
+  <h1 class="hero">An instrument that <span class="em">cannot record a failure</span> will report&nbsp;health.</h1>
 
   <p class="lede">
-    A matched-false-positive benchmark, evaluated on frozen public market and
-    recommender data, with the claim boundary specified in Lean 4.
+    Loopzero is an independent research program on measurement validity in
+    recursive systems — markets, recommenders, model-training loops — where a
+    system's own output becomes its next input.
   </p>
 
-  <div class="led-by">An independent research program led by <a href="https://davidmullett.com/" target="_blank" rel="noopener">David&nbsp;Mullett</a>.</div>
+  <div class="led-by">Led by <a href="https://davidmullett.com/" target="_blank" rel="noopener">David&nbsp;Mullett</a>.</div>
 
-  <!-- Add review status here when true, e.g. "Preprint · June 2026 · under review at PNAS Nexus" -->
-  <div class="pub-status">Preprint · June 2026</div>
+  <div class="paper-cite">Paper: <em>Absorbing Shadow Classes in Conjunctive Label Rules</em></div>
+
+  <div class="pub-status">Submitted to arXiv · August 2026 · identifier pending</div>
 
   <div class="header-meta">
-    <a href="paper.html">Read the paper</a>
+    <a href="https://github.com/davidmullett/loopzero-paper-public/blob/main/manuscript_shadow_classes/build/paper_main.pdf" target="_blank" rel="noopener">Read the manuscript</a>
+    <span class="meta-sep">·</span>
+    <a href="#protocol">Run the protocol</a>
     <span class="meta-sep">·</span>
     <a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">Artifact &amp; code</a>
     <span class="meta-sep">·</span>
@@ -294,132 +306,160 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
 </header>
 
 <!-- THE PROGRAM -->
-<section>
+<section id="program">
   <h2>The program</h2>
   <p>
-    Recursive systems — markets and recommenders in the current benchmarks, with
-    model-training loops as a secondary directional check — can enter
-    a regime where local updates stay coherent while real forward progress
-    becomes inaccessible. Loopzero asks one bounded question: does that regime
-    leave an <em>observable footprint before</em> overt failure, and can a
-    warning built on that footprint survive a fair test?
+    The program began by asking whether recursive degradation leaves an
+    observable footprint before overt failure. Testing that question required
+    building a benchmark — and the benchmark turned out to be the finding.
   </p>
   <p>
-    This sits in the lineage of early-warning signals for critical transitions —
-    the variance, autocorrelation, and critical-slowing-down precursors developed
-    by Scheffer, Dakos, and others — but starts from a different object: a formally
-    specified no-progress obstruction rather than a statistical precursor, and
-    holds it to the matched-false-positive discipline that the same literature's
-    skeptics have rightly demanded.
+    Its label rule declared a unit degraded only when a run condition co-occurred
+    with an eligibility condition. The eligibility clause was absorbing: once a
+    unit crossed below the floor it could never satisfy the rule again, so the
+    units failing most continuously were filed, by construction, as healthy
+    controls. 69.2% of the nominal control class was in that state. The most
+    natural early-warning statistic pointed the wrong way, and a favourable
+    published result turned out to be an artifact of the contamination.
   </p>
-  <p class="sub">
-    The claim boundary is specified in Lean&nbsp;4. The bridge from that formal
-    object to real telemetry is treated as a conditional, falsifiable empirical
-    question — not a verified one. Motivation and result are kept in separate
-    registers throughout.
+  <p>
+    The program's subject is now that class of failure: <strong>what a measuring
+    instrument is structurally unable to record, and what happens to the cases it
+    cannot see.</strong>
   </p>
 </section>
 
-<!-- CLAIM LADDER -->
-<section>
-  <h2>Claim ladder</h2>
+<!-- THE FINDING -->
+<section id="finding">
+  <h2>The finding</h2>
+  <p>
+    <strong>3,292 of 4,755</strong> nominal controls — 69.2% — were structurally
+    unlabelable: fully observed, failing continuously, and incapable under the
+    rule of ever being recorded as failures. They missed a median 15 of 20 early
+    steps; the labeled failures missed at most 7.
+  </p>
+  <p>
+    A pre-registered learnability gate caught the contradiction before any
+    detector result existed. Treating starvation as a competing terminal event
+    and rebuilding the control class repaired the instrument: the same gate that
+    failed now passes (<span class="band">TPR 0.561</span> against a chance rate
+    of 0.05) — the first valid measurement the benchmark produced.
+  </p>
+  <div class="result">
+    <span class="rlabel">Reported in full</span>
+    <p class="pull">
+      On the repaired instrument, the pre-registered hypothesis failed at every
+      alarm budget (<span class="band">ΔTPR = −0.472, CI [−0.496, −0.444]</span>).
+      That null is the published result.
+    </p>
+  </div>
+</section>
+
+<!-- THE PROTOCOL -->
+<section id="protocol">
+  <h2>The protocol</h2>
+  <p>
+    Two checks, an afternoon's work, runnable on any labeled benchmark.
+  </p>
   <ul class="ladder">
     <li>
-      <span class="rung-tag v">Verified</span>
-      <span class="rung-title">Formal obstruction</span>
-      <span class="rung-desc">A minimal no-progress obstruction over preorders, machine-checked in Lean&nbsp;4 (<code>collapse_via_progresscycle_public</code>). Intentionally elementary — its job is to fix the claim boundary, not to contribute to formal methods.</span>
+      <span class="rung-tag">Census</span>
+      <span class="rung-title">The shadow-class census</span>
+      <span class="rung-desc">Every eligibility condition partitions a population into labelable and unlabelable units. Report the size and behaviour of the unlabelable stratum before using the benchmark for inference.</span>
     </li>
     <li>
-      <span class="rung-tag s">Stated</span>
-      <span class="rung-title">Conditional telemetry bridge</span>
-      <span class="rung-desc">An assumed measurement map from system state to three observable witnesses — gain (G), recursive persistence (p), diversity (δ). Stated as an assumption, tested empirically, never claimed as verified.</span>
+      <span class="rung-tag">Gate</span>
+      <span class="rung-title">The learnability gate</span>
+      <span class="rung-desc">Ask whether the simplest label-derived signal separates the classes in the right direction, above chance, at a matched alarm budget. If it does not, no detector result from that population can be interpreted.</span>
     </li>
+  </ul>
+  <p style="margin-top:1.2em">
+    The protocol is free, and stays free. If you maintain a benchmark — public
+    or internal — the ask is simple: <strong>agree now to run the census on it
+    and publish the result either way.</strong> The program supports the run.
+    A clean bill of health is as publishable as a pathology, and agreeing in
+    advance is what makes that true.
+  </p>
+  <ul class="contact-list">
     <li>
-      <span class="rung-tag p">Protocol</span>
-      <span class="rung-title">Matched-false-positive contract</span>
-      <span class="rung-desc">Detectors are compared at a single locked alert budget — the equal-false-positive band <span class="band">[0.03, 0.07]</span> — rather than at convenient family-specific thresholds.</span>
-    </li>
-    <li>
-      <span class="rung-tag t">Tested</span>
-      <span class="rung-title">Benchmark outcomes</span>
-      <span class="rung-desc">Frozen public benchmarks in two domains. Outcome, including non-acceptance, reported in full. See below.</span>
+      <a href="mailto:d@loopzero.org?subject=Shadow-class%20census">Start a run <span class="contact-arrow">→</span></a>
+      <span class="contact-url">d@loopzero.org</span>
     </li>
   </ul>
 </section>
 
-<!-- WITNESS TRIAD -->
-<section>
-  <h2>The witnesses</h2>
-  <div class="triad">
-    <div class="witness">
-      <div class="w-sym">G<span class="arrow">↑</span></div>
-      <div class="w-name">Gain</div>
-      <div class="w-gloss">Perturbation is amplified rather than damped.</div>
-    </div>
-    <div class="witness">
-      <div class="w-sym">p<span class="arrow">↑</span></div>
-      <div class="w-name">Persistence</div>
-      <div class="w-gloss">Recent internal state increasingly determines what comes next.</div>
-    </div>
-    <div class="witness">
-      <div class="w-sym">δ<span class="arrow">↓</span></div>
-      <div class="w-name">Diversity</div>
-      <div class="w-gloss">The accessible range of trajectories contracts.</div>
-    </div>
-  </div>
+<!-- OPEN PROBLEMS -->
+<section id="open-problems">
+  <h2>Open problems</h2>
+  <p>
+    Two questions the paper leaves open. Both are scoped, pre-registrable, and
+    available to anyone who wants them.
+  </p>
+  <ul class="ladder">
+    <li>
+      <span class="rung-tag">01</span>
+      <span class="rung-title">Slate-structure early warning, fair-fight edition</span>
+      <span class="rung-desc">On the purified population, does any slate-structure quantity with demonstrated depletion-independence beat the outcome-stream baseline? One indicator (δ) survived directionally; the gate and benchmark are public; the bar is the early miss rate. Candidates must show independence from frontier depletion <em>before</em> detector evaluation.</span>
+    </li>
+    <li>
+      <span class="rung-tag">02</span>
+      <span class="rung-title">The churn inversion</span>
+      <span class="rung-desc">Churn's effect reverses sign on the purified population — among clean controls only — and the paper does not explain why. Diagnose the mechanism.</span>
+    </li>
+  </ul>
+  <p class="sub" style="margin-top:1.2em">
+    Three witnesses the bridge proposed — gain, persistence, diversity. On the
+    repaired instrument one held its predicted direction, one inverted, one went
+    null. The bridge remains an open empirical question.
+  </p>
 </section>
 
-<!-- THE RESULT (null, blunt) -->
-<section>
-  <h2>The result</h2>
-  <div class="result">
-    <span class="rlabel">Reported in full</span>
-    <p class="pull">
-      Across both flagship benchmarks — a segmented markets family
-      (Volmageddon 2018, COVID 2020) and a MovieLens-25M recommender replay —
-      no tested detector reached an accepted operating point under the locked
-      band <span class="band">[0.03, 0.07]</span>.
-    </p>
-    <p>
-      That includes the standard early-warning comparators (variance EWS, AC1,
-      CUSUM, Page-Hinkley, matrix profile, permutation entropy)
-      <em>and</em> Loopzero's own pre-registered detector. What survives is the
-      directional G/p/δ bridge and a falsifiable benchmark framework. Binary
-      operational-detector acceptance remains open. A digitized LLM
-      training-loop trajectory (Shumailov et&nbsp;al., 2024) is reported only as
-      a directional-consistency check — not as a third benchmark.
-    </p>
-  </div>
+<!-- THE RECORD -->
+<section id="record">
+  <h2>The record</h2>
+  <p>
+    Everything is checkable by a stranger.
+  </p>
+  <ul class="receipts">
+    <li>
+      <span class="r-key">Paper</span>
+      <span class="r-val"><em>Absorbing Shadow Classes in Conjunctive Label Rules</em> — arXiv, August 2026 <span class="r-hash">(identifier pending)</span> · <a href="https://github.com/davidmullett/loopzero-paper-public/blob/main/manuscript_shadow_classes/build/paper_main.pdf" target="_blank" rel="noopener">manuscript PDF</a></span>
+    </li>
+    <li>
+      <span class="r-key">Pre-registrations</span>
+      <span class="r-val">Study 2 registration <a href="https://osf.io/wka72" target="_blank" rel="noopener">osf.io/wka72</a> · Study 1 frozen pre-registration document, OSF project <a href="https://osf.io/7bvgz" target="_blank" rel="noopener">osf.io/7bvgz</a></span>
+    </li>
+    <li>
+      <span class="r-key">Code &amp; data</span>
+      <span class="r-val"><a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">github.com/davidmullett/loopzero-paper-public</a> <span class="r-hash">· code, data, deviations log, hash manifests</span></span>
+    </li>
+    <li>
+      <span class="r-key">Formal</span>
+      <span class="r-val">A minimal no-progress obstruction, machine-checked in Lean 4, fixed the original claim boundary; it is elementary and is not presented as a contribution to formal methods. Archived: <span class="r-hash">repo tag lean-v1.0</span>.</span>
+    </li>
+    <li>
+      <span class="r-key">Prior preprint</span>
+      <span class="r-val"><a href="paper.html"><em>Benchmarking Recursive-Collapse Warning Claims Under Matched False-Positive Control</em></a> · <a href="https://arxiv.org/abs/2606.00329" target="_blank" rel="noopener">arXiv 2606.00329</a>. <strong>Superseded</strong> on its recommender branch by the paper above: the directional result reported there is attributable to the label contamination the successor identifies. Left public and unaltered.</span>
+    </li>
+    <li>
+      <span class="r-key">ORCID</span>
+      <span class="r-val"><a href="https://orcid.org/0009-0004-2543-1664" target="_blank" rel="noopener">0009-0004-2543-1664</a></span>
+    </li>
+  </ul>
 </section>
 
-<!-- WHAT COMES NEXT -->
-<section>
-  <h2>What comes next</h2>
+<!-- COLLABORATE -->
+<section id="collaborate">
+  <h2>Collaborate</h2>
   <p>
-    Non-acceptance is the starting condition.
-  </p>
-  <p>
-    The next round hardens the conditions the result was measured under:
-    external replication on independent data, harder negative controls, a
-    wider set of comparators, and additional domains — including a
-    matched-false-positive benchmark for model collapse. The aim is to make
-    the result easier to break, not easier to believe.
-  </p>
-  <p>
-    That work is open. Loopzero is recruiting coauthors and technical
-    reviewers — formal-methods contributors to extend the Lean claim boundary,
-    recommender-systems and market-microstructure researchers to pressure-test
-    the empirical bridge, and early-warning-signal researchers working the
-    same problem from other directions. The benchmark artifacts, code, frozen
-    outputs, and reproducibility anchors are public where licensing allows, so
-    the critique can be specific.
-  </p>
-  <p class="sub">
-    What comes after this paper depends on what survives it.
+    The program is one person, and the next results should not be. What it needs:
+    teams willing to run the census on instruments they maintain, researchers who
+    want either open problem, and hostile readers who will make the claims
+    narrower.
   </p>
   <ul class="contact-list">
     <li>
-      <a href="mailto:d@loopzero.org">Replication · collaboration · review <span class="contact-arrow">→</span></a>
+      <a href="mailto:d@loopzero.org">Email <span class="contact-arrow">→</span></a>
       <span class="contact-url">d@loopzero.org</span>
     </li>
   </ul>

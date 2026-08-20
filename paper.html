@@ -91,6 +91,16 @@ code { font-family:var(--mono); font-size:0.82em; color:var(--ink); }
 .summary { max-width:58ch; border-left:2px solid var(--ph-border); background:var(--ph-dim);
   padding:18px 22px; font-family:var(--serif); font-size:var(--t-lede); line-height:1.66; color:var(--ink); }
 
+.superseded { max-width:58ch; border:1px solid var(--rule-2); border-top:3px solid var(--over);
+  background:var(--paper-2); padding:18px 22px; margin-bottom:44px; }
+.superseded .slabel { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:500; letter-spacing:0.24em;
+  text-transform:uppercase; color:var(--ink); display:block; margin-bottom:10px; }
+.superseded p { font-size:var(--t-aux); max-width:none; color:var(--ink-2); line-height:1.65; margin-bottom:0; }
+.superseded em { font-style:italic; color:var(--ink); }
+.superseded .successor { font-family:var(--mono); font-size:var(--t-label); letter-spacing:0.04em;
+  color:var(--ink-2); text-decoration:none; display:inline-block; margin-top:10px; }
+.superseded .successor:hover { color:var(--ph-d); }
+
 .result { max-width:58ch; border:1px solid var(--rule-2); border-top:3px solid var(--ink);
   background:var(--paper-2); padding:20px 24px; }
 .result .rlabel { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:500; letter-spacing:0.24em;
@@ -156,11 +166,24 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
     Loopzero
   </a>
   <ul class="nav-list">
-    <li><a href="index.html">Research</a></li>
-    <li><a href="paper.html" aria-current="page">Paper</a></li>
+    <li><a href="https://github.com/davidmullett/loopzero-paper-public/blob/main/manuscript_shadow_classes/build/paper_main.pdf" target="_blank" rel="noopener">Manuscript</a></li>
+    <li><a href="index.html#protocol">Protocol</a></li>
+    <li><a href="index.html#record">Record</a></li>
     <li><a href="mailto:d@loopzero.org">Contact</a></li>
   </ul>
 </nav>
+
+<!-- SUPERSESSION NOTICE -->
+<div class="superseded">
+  <span class="slabel">Superseded</span>
+  <p>
+    The recommender-branch result reported here is attributable to a
+    label-contamination pathology identified in the successor paper,
+    <em>Absorbing Shadow Classes in Conjunctive Label Rules</em> (August 2026).
+    This page is left public and unaltered.
+  </p>
+  <a class="successor" href="https://github.com/davidmullett/loopzero-paper-public/blob/main/manuscript_shadow_classes/build/paper_main.pdf" target="_blank" rel="noopener">Read the successor →</a>
+</div>
 
 <header>
   <div class="eyebrow">Preprint</div>
