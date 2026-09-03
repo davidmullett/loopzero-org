@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#f1f0ec">
+<title>Two instruments, checked in advance — Loopzero</title>
+<meta name="description" content="A pre-registered audit of the KKBOX / WSDM Cup 2018 churn dataset and the tau-bench / tau2-bench evaluation harnesses. The plan was hashed and registered before either instrument was opened. Both came back negative; seven other findings are reported with evidence grades.">
+
+<link rel="canonical" href="https://loopzero.org/audit.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Loopzero">
+<meta property="og:url" content="https://loopzero.org/audit.html">
+<meta property="og:title" content="Two instruments, checked in advance">
+<meta property="og:description" content="A pre-registered audit of two public instruments. The plan was hashed and registered before either was opened. The defect I went looking for was in neither. Seven other things were.">
+<meta property="og:image" content="https://loopzero.org/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400;1,8..60,500&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream:#f1f0ec; --paper-2:#efebe0; --ink:#1a1710; --ink-2:#48443c; --ink-3:#6e6a62;
+  --rule-lt:#d8d4c8; --rule-2:#c9c4b6; --ph:#1faa5e; --ph-d:#157a43; --ph-border:rgba(45,214,122,.5);
+  --ph-dim:rgba(45,214,122,.05); --over:#b4502a;
+  --serif:'Source Serif 4',Georgia,serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  --t-label-xs:0.52rem; --t-label:0.56rem; --t-meta:0.66rem; --t-aux:0.86rem; --t-label-lg:0.92rem;
+  --t-body:1rem; --t-lede:1.04rem; --t-hero:1.6rem; --t-hero-sm:1.42rem; --t-title:1.7rem; --t-title-sm:1.46rem;
+}
+html { font-size:18px; -webkit-text-size-adjust:100%; text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased; font-feature-settings:"liga" 1,"kern" 1,"onum" 1;
+  background:var(--cream); color-scheme:only light; }
+body { background:var(--cream) !important; color:var(--ink) !important; font-family:var(--serif); line-height:1.75; }
+.page { max-width:720px; margin:0 auto 0 max(80px,13vw); padding:52px 0 132px; }
+a { color:var(--ink); text-decoration:underline; text-decoration-color:var(--rule-2);
+  text-underline-offset:3px; text-decoration-thickness:1px; transition:text-decoration-color .14s,color .14s; }
+a:hover { text-decoration-color:var(--ph-d); }
+
+nav { margin-bottom:46px; padding-bottom:16px; border-bottom:1px solid var(--rule-lt);
+  display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.nav-list { list-style:none; display:flex; gap:0 26px; flex-wrap:wrap; }
+.nav-list a { font-family:var(--mono); font-size:var(--t-label); font-weight:400; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--ink-2); text-decoration:none; }
+.nav-list a:hover { color:var(--ink); }
+.nav-list a[aria-current="page"] { color:var(--ink); }
+.nav-home { font-family:var(--mono); font-size:var(--t-label); font-weight:500; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--ink-2); text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+.nav-home:hover { color:var(--ink); }
+.mark svg { display:block; overflow:visible; }
+.mark .spiral { stroke:var(--ink); stroke-width:1.2; fill:none; stroke-linecap:round; }
+.mark .core { fill:var(--ph); }
+.mark .spiral.spiral-static { animation:none; stroke-dasharray:none; stroke-dashoffset:0; }
+.mark .core.core-static { animation:none; opacity:1; }
+.mark-sm .spiral { stroke-width:3.4; }
+
+.eyebrow { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:500; letter-spacing:0.26em;
+  text-transform:uppercase; color:var(--ph-d); margin-bottom:16px; }
+.title { font-family:var(--serif); font-size:var(--t-title); font-weight:500; font-style:italic;
+  line-height:1.28; letter-spacing:-0.01em; color:var(--ink); max-width:24ch; margin-bottom:14px; text-wrap:balance; }
+.lede { font-family:var(--serif); font-size:var(--t-lede); line-height:1.7; color:var(--ink-2);
+  max-width:56ch; margin-bottom:18px; }
+.byline { font-family:var(--mono); font-size:var(--t-label); font-weight:300; color:var(--ink-2);
+  letter-spacing:0.03em; line-height:1.8; margin-bottom:22px; }
+.byline a { color:var(--ink-2); text-decoration:none; }
+.byline a:hover { color:var(--ph-d); }
+
+/* PROPOSED — §09-compliant hairline field separator, replaces typed · glyphs.
+   1px CSS border in the rule/ink-3 family, per brand system §06 "Inline metadata rows". */
+.metarow { display:flex; flex-wrap:wrap; align-items:baseline; row-gap:4px; }
+.metarow > * + * { border-left:1px solid var(--rule-2); padding-left:13px; margin-left:13px; }
+.pending { color:var(--ink-3); }
+
+.toplinks { display:flex; flex-wrap:wrap; gap:0 22px; padding:14px 0; border-top:1px solid var(--rule-lt);
+  border-bottom:1px solid var(--rule-lt); margin-bottom:48px; }
+.toplinks a { font-family:var(--mono); font-size:var(--t-label); font-weight:400; color:var(--ink);
+  text-decoration:underline; text-decoration-color:var(--rule-2); white-space:nowrap; }
+.toplinks a:hover { text-decoration-color:var(--ph-d); }
+
+section { margin-bottom:48px; }
+h2 { font-family:var(--mono); font-size:var(--t-label); font-weight:400; letter-spacing:0.24em;
+  text-transform:uppercase; color:var(--ink-2); margin-bottom:22px; margin-left:-80px;
+  width:calc(100% + 80px); line-height:1.4; }
+.secnum { color:var(--ink-3); margin-right:12px; }
+.fnum { font-family:var(--mono); font-size:var(--t-meta); font-weight:400; color:var(--ink-3);
+  margin-right:14px; font-style:normal; }
+h3 { font-family:var(--serif); font-size:var(--t-lede); font-weight:500; font-style:italic;
+  color:var(--ink); max-width:58ch; margin:34px 0 14px; line-height:1.4; }
+h4 { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:500; letter-spacing:0.24em;
+  text-transform:uppercase; color:var(--ink-3); margin:30px 0 14px; }
+p { max-width:58ch; margin-bottom:1.2em; font-size:var(--t-body); line-height:1.74; }
+p:last-child { margin-bottom:0; }
+.sub { color:var(--ink-2); }
+em.term { font-style:italic; }
+code { font-family:var(--mono); font-size:0.82em; color:var(--ink); }
+.band { font-family:var(--mono); font-size:0.88em; white-space:nowrap; }
+
+/* PROPOSED — evidence grade annotation. Composed from .band (mono, nowrap)
+   and code's 0.82em inline-mono size; colour --ink-2 so it reads as apparatus
+   without dropping to the muted --ink-3 used for de-emphasised hashes. */
+.grade { font-family:var(--mono); font-size:0.82em; font-weight:400; color:var(--ink-2); white-space:nowrap; }
+
+.summary { max-width:58ch; border-left:2px solid var(--ph-border); background:var(--ph-dim);
+  padding:18px 22px; font-family:var(--serif); font-size:var(--t-lede); line-height:1.66; color:var(--ink); }
+.summary p { font-size:var(--t-lede); max-width:none; line-height:1.66; }
+.summary .slabel { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:500; letter-spacing:0.24em;
+  text-transform:uppercase; color:var(--ph-d); display:block; margin-bottom:12px; }
+
+.result { max-width:58ch; border:1px solid var(--rule-2); border-top:3px solid var(--ink);
+  background:var(--paper-2); padding:20px 24px; }
+.result .rlabel { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:500; letter-spacing:0.24em;
+  text-transform:uppercase; color:var(--ink-2); display:block; margin-bottom:12px; }
+.result p { font-size:var(--t-lede); max-width:none; }
+.result .pull { font-weight:500; }
+
+/* PROPOSED — held-open correspondence block. Declarations copied from
+   paper.html .superseded (amber top rule = attention notice), new semantic name. */
+.heldopen { max-width:58ch; border:1px solid var(--rule-2); border-top:3px solid var(--over);
+  background:var(--paper-2); padding:18px 22px; }
+.heldopen .hlabel { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:500; letter-spacing:0.24em;
+  text-transform:uppercase; color:var(--ink); display:block; margin-bottom:10px; }
+.heldopen p { font-size:var(--t-aux); max-width:none; color:var(--ink-2); line-height:1.65; margin-bottom:0; }
+.heldopen em { font-style:italic; color:var(--ink); }
+
+.fals { list-style:none; max-width:58ch; border-top:1px solid var(--rule-lt); }
+.fals li { padding:13px 0 13px 22px; border-bottom:1px solid var(--rule-lt); position:relative;
+  font-size:var(--t-aux); line-height:1.6; color:var(--ink-2); }
+.fals li::before { content:"—"; position:absolute; left:0; color:var(--ink-2); font-family:var(--mono); }
+.fals strong { color:var(--ink); font-weight:500; }
+.fals .dref { font-family:var(--mono); font-size:var(--t-meta); color:var(--ink-3); }
+
+.cite-box { max-width:58ch; border:1px solid var(--rule-lt); background:rgba(0,0,0,.03);
+  padding:16px 18px; font-family:var(--mono); font-size:var(--t-meta); line-height:1.7; color:var(--ink-2);
+  white-space:pre-wrap; word-break:break-word; }
+
+/* PROPOSED — data table. The site had no table styling. Derived from .receipts:
+   hairline row rules, mono uppercase keys, serif values, baseline alignment.
+   .tablewrap scrolls the table inside its own container so the body never
+   scrolls horizontally. */
+.tablewrap { max-width:58ch; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.dtable { border-collapse:collapse; width:100%; min-width:26rem; }
+.dtable th { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:400; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--ink-3); text-align:left; vertical-align:baseline;
+  padding:0 20px 11px 0; border-bottom:1px solid var(--rule-2); }
+.dtable td { font-family:var(--serif); font-size:var(--t-aux); color:var(--ink-2); line-height:1.6;
+  vertical-align:baseline; padding:12px 20px 12px 0; border-bottom:1px solid var(--rule-lt); }
+.dtable th:last-child, .dtable td:last-child { padding-right:0; }
+.dtable .assign { font-family:var(--mono); font-size:var(--t-meta); letter-spacing:0.05em;
+  color:var(--ink); white-space:nowrap; }
+
+/* PROPOSED — mono link column in .dtable. No new values: re-asserts the
+   existing .r-val treatment (mono, --t-meta, weight 300, --ink-2) on a table
+   cell, where the serif `.dtable td` rule would otherwise win on specificity.
+   .r-val's word-break / overflow-wrap already apply, so long paths wrap
+   inside the cell rather than widening the table. */
+.dtable td.r-val { font-family:var(--mono); font-size:var(--t-meta); font-weight:300;
+  color:var(--ink-2); line-height:1.7; }
+.dtable td.r-val > span { display:block; }
+.dtable td.r-val > span + span { margin-top:5px; }
+.dtable.cols-recs th:first-child, .dtable.cols-recs td:first-child { width:56%; }
+
+.receipts { list-style:none; max-width:58ch; border-top:1px solid var(--rule-lt); }
+.receipts li { display:grid; grid-template-columns:168px 1fr; gap:4px 18px; padding:11px 0;
+  border-bottom:1px solid var(--rule-lt); align-items:baseline; }
+.r-key { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:400; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--ink-3); }
+.r-val { font-family:var(--mono); font-size:var(--t-meta); font-weight:300; color:var(--ink-2);
+  line-height:1.7; word-break:break-word; overflow-wrap:anywhere; }
+.r-val a { color:var(--ink-2); text-decoration-color:var(--rule-2); }
+.r-val a:hover { text-decoration-color:var(--ph-d); }
+.r-hash { color:var(--ink-3); }
+
+.closer { max-width:58ch; margin-top:12px; padding-top:20px; border-top:2px solid var(--ink);
+  font-style:italic; color:var(--ink-2); font-size:var(--t-aux); line-height:1.7; }
+
+footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt); }
+.footer-text { font-family:var(--mono); font-size:var(--t-label); font-weight:300; color:var(--ink-2);
+  letter-spacing:0.05em; line-height:1.9; }
+.footer-text a { font-family:var(--mono); font-size:var(--t-label); font-weight:300; color:var(--ink-2); text-decoration:none; }
+.footer-text a:hover { color:var(--ph-d); }
+
+@media (max-width:760px){ html{font-size:17px;} .page{margin:0 auto;padding:46px 32px 96px;}
+  h2{margin-left:-24px;width:calc(100% + 24px);} .title{font-size:var(--t-title-sm);}
+  .receipts li{grid-template-columns:1fr;gap:2px;} }
+@media (max-width:460px){ html{font-size:16px;} .page{padding:34px 20px 80px;} .nav-list{gap:12px 18px;}
+  h2{margin-left:-14px;width:calc(100% + 14px);} }
+</style>
+</head>
+<body>
+
+<div class="page">
+<main>
+
+<nav aria-label="Site navigation">
+  <a class="nav-home" href="index.html">
+    <span class="mark mark-sm" aria-hidden="true">
+      <svg width="20" height="20" viewBox="-8 -8 96 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Loopzero mark">
+        <path class="spiral spiral-static" d="M40,40 Q40,8 66,14 Q82,25 80,48 Q74,69 50,74 Q23,78 9,56 Q-4,34 8,14 Q20,-4 42,2 Q66,8 76,30 Q84,54 70,68 Q54,82 34,80 Q14,78 6,62 Q-2,46 8,34 Q18,22 34,20 Q52,18 60,34 Q68,50 58,62 Q48,74 36,70 Q24,66 22,54 Q20,44 28,38 Q36,32 44,36 Q52,40 50,48 Q48,56 42,54 Q38,52 38,48 Q38,44 41,42"/>
+        <circle class="core core-static" cx="41" cy="42" r="3.6"/>
+      </svg>
+    </span>
+    Loopzero
+  </a>
+  <ul class="nav-list">
+    <li><a href="https://github.com/davidmullett/loopzero-paper-public/blob/main/manuscript_shadow_classes/build/paper_main.pdf" target="_blank" rel="noopener">Manuscript</a></li>
+    <li><a href="index.html#protocol">Protocol</a></li>
+    <li><a href="index.html#record">Record</a></li>
+    <li><a href="mailto:d@loopzero.org">Contact</a></li>
+  </ul>
+</nav>
+
+<header>
+  <div class="eyebrow">Pre-registered audit</div>
+  <h1 class="title">Two instruments, checked in&nbsp;advance</h1>
+  <p class="lede">
+    A pre-registered audit of the KKBOX / WSDM Cup 2018 churn dataset and the
+    &tau;-bench / &tau;&sup2;-bench evaluation harnesses. The defect I went
+    looking for was in neither. Seven other things were.
+  </p>
+  <div class="byline metarow">
+    <span>David Mullett</span>
+    <span>Loopzero</span>
+    <span class="pending">[publication date]</span>
+  </div>
+  <div class="toplinks">
+    <a href="https://osf.io/ksm3n" target="_blank" rel="noopener">Registration</a>
+    <a href="https://doi.org/10.17605/OSF.IO/KSM3N" target="_blank" rel="noopener">DOI</a>
+    <a href="#check">How to check this</a>
+  </div>
+</header>
+
+<section>
+  <h2>What to check first</h2>
+  <div class="summary">
+    <span class="slabel">If you check nothing else</span>
+    <p>
+      The plan below was written, hashed, and publicly registered
+      <strong>before either instrument was opened</strong>. The registration is
+      <strong><a href="https://osf.io/ksm3n" target="_blank" rel="noopener">osf.io/ksm3n</a></strong>,
+      DOI <strong><a href="https://doi.org/10.17605/OSF.IO/KSM3N" target="_blank" rel="noopener">10.17605/OSF.IO/KSM3N</a></strong>,
+      timestamped <strong>2026-08-24T15:33:01Z</strong>. The plan is published
+      here in full. Verify the hash against the document, and the timestamp
+      against the registration.
+    </p>
+  </div>
+  <ul class="receipts" style="margin-top:22px">
+    <li><span class="r-key">Frozen plan SHA-256</span><span class="r-val">b15f472ef72994970957eda1e1ebc53f5480b759eb6ab71e076496145a7fda0e</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="secnum">01</span>What was fixed in advance</h2>
+  <p>
+    I have a paper about a defect I found in a benchmark I built myself. A label
+    rule recorded a unit as degraded only when a failure condition and an
+    <em class="term">eligibility</em> condition held together; eligibility was
+    one-directional, so once a unit crossed the threshold it could never satisfy
+    the rule again. Units that were failing continuously became structurally
+    unlabelable and were filed as healthy controls.
+    <strong>69.2% of the control class turned out to be those units.</strong>
+  </p>
+  <p>
+    The obvious question is whether this happens anywhere else. The obvious way
+    to get that question wrong is to go looking for it and find it.
+  </p>
+  <p>
+    So before opening anything, I wrote down: <strong>eleven questions</strong>
+    about how each instrument handles units it cannot evaluate, <strong>a
+    decision rule with seven branches</strong> mapping evidence to verdicts,
+    <strong>a materiality threshold</strong> of 5% of units in the observation
+    window, <strong>the expected result</strong> &mdash; that both would come
+    back negative &mdash; and <strong>a commitment to publish either way</strong>,
+    including an indeterminate outcome. Then I hashed the document and
+    registered the hash publicly.
+  </p>
+  <p>
+    <strong>The decision rule turns on one question:</strong>
+    <em>does the unevaluable unit leave the denominator, or stay in it and get
+    counted as a success?</em> Only the second is the defect. Leaving is
+    exclusion &mdash; a real problem, a different one.
+  </p>
+  <p>
+    There is also a persistence requirement: the unit must <strong>keep
+    accruing</strong> real failures while being structurally unrecordable.
+    <strong>Termination is not absorption.</strong> A trial that crashes and
+    stops has not entered an absorbing state; it has simply ended.
+  </p>
+</section>
+
+<section>
+  <h2><span class="secnum">02</span>The two instruments</h2>
+  <p>
+    <strong>KKBOX / WSDM Cup 2018 churn dataset</strong> &mdash; a public
+    churn-prediction dataset from a music streaming service, distributed through
+    Kaggle, with roughly a million labelled users. Its churn label is a
+    conjunctive rule with a window condition, which is the shape the paper
+    describes.
+  </p>
+  <p>
+    <strong>&tau;-bench and &tau;&sup2;-bench</strong> &mdash; Sierra's
+    agent-evaluation harnesses. Scores from these appear in frontier-model
+    reporting and on a public leaderboard. The relevant object is
+    <code>pass^k</code>, computed across repeated trials of the same task.
+  </p>
+  <p>
+    Both were pinned by commit or release before reading. Nothing was executed:
+    <strong>no model was called, no benchmark was run, no cost was
+    incurred.</strong> For KKBOX this was a data read under the competition's
+    rules; for &tau;-bench it was a code read at three pinned commits.
+  </p>
+</section>
+
+<section>
+  <h2><span class="secnum">03</span>The result: not found, in either</h2>
+  <div class="result">
+    <span class="rlabel">Result</span>
+    <p class="pull">Neither instrument carries the paper's mechanism.</p>
+  </div>
+
+  <div class="tablewrap" style="margin-top:28px">
+    <table class="dtable">
+      <thead>
+        <tr><th scope="col">Instrument</th><th scope="col">Assignment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>KKBOX / WSDM Cup 2018</strong></td><td class="assign">NEGATIVE &mdash; exclusion</td></tr>
+        <tr><td><strong>&tau;-bench</strong> (<code>tau-bench</code>, dormant) &mdash; instrument</td><td class="assign">MISSCORING</td></tr>
+        <tr><td><strong>&tau;-bench</strong> (<code>tau-bench</code>) &mdash; <code>pass^k</code></td><td class="assign">NEGATIVE &mdash; correctly handled</td></tr>
+        <tr><td><strong>&tau;&sup2;-bench</strong> (<code>tau2-bench</code> v1.0.1) &mdash; instrument</td><td class="assign">MISSCORING</td></tr>
+        <tr><td><strong>&tau;&sup2;-bench</strong> (<code>tau2-bench</code> v1.0.1) &mdash; <code>pass^k</code></td><td class="assign">NEGATIVE &mdash; exclusion</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:28px">
+    <strong>KKBOX excludes out-of-window users from the labelled cohort rather
+    than retaining them as successes.</strong> The documentation states this
+    outright and the data agrees: 92.46% of out-of-window users are absent from
+    the label file entirely. That is the correct treatment.
+  </p>
+  <p>
+    <strong>&tau;&sup2;-bench removes trials it cannot evaluate from the
+    metric.</strong> Infrastructure-error trials are filtered out before
+    <code>pass^k</code> is computed. The unit that cannot be evaluated is the
+    <em>trial</em>, and it leaves. The unit that stays &mdash; the task &mdash;
+    <em>can</em> be evaluated, on its surviving trials. There is no unit here
+    that is both unevaluable and retained.
+  </p>
+  <p>
+    <strong>With three earlier gate checks on other instruments, that is five
+    instruments examined and five negatives.</strong> Two of the five &mdash;
+    these two &mdash; were pre-registered. The other three were earlier checks
+    run without registration, and I do not present them as more than that.
+  </p>
+
+  <h3>The prediction was right about direction and wrong about mechanism</h3>
+  <p>
+    On record before the read: <em>"I expect both to come back negative, and I
+    expect KKBox in particular may turn out to be window censoring rather than
+    absorption."</em>
+  </p>
+  <p>
+    Direction: right. <strong>Mechanism: wrong, and not by imprecision.</strong>
+    Censoring was specifically tested for and found absent in the release where
+    it could be tested &mdash; churn is flat at roughly 6% across expiry days
+    1&ndash;27 while observability falls from 27 days to 1. The predicted
+    mechanism was examined and ruled out. The finding is exclusion, which is a
+    different branch.
+  </p>
+  <p>
+    For &tau;-bench the plan predicted the exact place to look and the code had
+    the structure there. <strong>What it did not anticipate is that the
+    structure can be present without the conditions being met</strong> &mdash; a
+    code path is not an instantiation. That distinction is the most useful thing
+    this exercise produced about the protocol itself.
+  </p>
+</section>
+
+<section>
+  <h2><span class="secnum">04</span>The seven other findings</h2>
+  <p>
+    None of these is the paper's mechanism. All are checkable by a third party
+    against a fixed public artefact.
+  </p>
+  <p>
+    <strong>Evidence grades are carried throughout and they are not
+    decoration.</strong>
+  </p>
+  <ul class="fals">
+    <li><span class="grade">[E]</span> &nbsp;read directly off code or documentation</li>
+    <li><span class="grade">[E&dagger;]</span> &nbsp;exact given a stated cutoff</li>
+    <li><span class="grade">[R]</span> &nbsp;dependent on a reconstruction that reproduces the cohort at 88.78%</li>
+    <li><span class="grade">[I]</span> &nbsp;inferred from traced control flow, not executed</li>
+  </ul>
+
+  <h4>KKBOX</h4>
+
+  <h3><span class="fnum">1</span>About a million published labels cannot be verified against the files shipped with them. <span class="grade">[E]</span></h3>
+  <p>
+    <code>transactions.csv</code> ends at <code>20170228</code>. The February
+    expiries it is meant to explain need observation through 30 March under the
+    stated 30-day rule. <strong>No label in the file can be checked against the
+    transactions distributed alongside it.</strong> For the original release
+    this is a publishing artefact rather than a labelling one &mdash; KKBOX's
+    stated log history runs to 2017-03-31, so the labeller had what the rule
+    requires. <strong>For the <code>_v2</code> release I cannot say the
+    same:</strong> its window is March expiries needing observation to 30 April,
+    beyond that stated history, and only one of the thirty-one expiry days has
+    full observation inside it.
+  </p>
+
+  <h3><span class="fnum">2</span>The cohort rule does not reproduce. <span class="grade">[R]</span></h3>
+  <p>
+    Best reconstruction matches <strong>881,477 of 992,931</strong> labelled
+    users &mdash; <strong>88.78%</strong>. The distributed labeller script has
+    its dates modified for local running and is explicitly not the production
+    configuration, which likely explains the gap. <strong>Every count marked
+    <span class="grade">[R]</span> in this audit inherits it.</strong>
+  </p>
+
+  <h3><span class="fnum">3</span>The headline churn rate moves 41% between adjacent months. <span class="grade">[E]</span></h3>
+  <p>
+    <strong>6.392%</strong> for February (n = 992,931) against
+    <strong>8.994%</strong> for March (n = 970,960). Nothing in the distributed
+    material establishes whether that is seasonality, cohort composition, or a
+    difference in how the two label sets were produced.
+  </p>
+
+  <h3><span class="fnum">4</span>90.45% of the <code>_v2</code> cohort cannot have their cohort-entry expiry established from that release's own files. <span class="grade">[E&dagger;]</span></h3>
+  <p>
+    This is the firmest number in the audit, and what it establishes is
+    <strong>that a question cannot be answered.</strong> It is where the defect
+    was most likely to appear, and it was not testable there. <strong>Blocked,
+    not negative</strong> &mdash; and reported prominently rather than buried,
+    because the alternative is assigning on the convenient half of the evidence.
+  </p>
+
+  <h4>&tau;-bench / &tau;&sup2;-bench</h4>
+
+  <h3><span class="fnum">5</span><code>pass^k</code> has two documented conventions and the instrument does not reconcile them. <span class="grade">[E]</span></h3>
+  <p>
+    At the pinned commit, three in-tree sources say the metric
+    <strong>excludes</strong> infrastructure-error trials &mdash; the code
+    itself, the code's own warning string, and <code>CHANGELOG.md:103</code>.
+    One says the opposite: <code>RELEASE_NOTES.md:83</code> states that
+    <em>"pass^k values are recomputed counting infrastructure-error simulations
+    as failed trials (the leaderboard convention)."</em> <strong>Nothing in
+    either document states which convention governs a published
+    figure.</strong> A reconciliation is available &mdash; that the leaderboard
+    convention is a recomputation separate from the library metric &mdash; but
+    neither document says so and this audit does not supply it.
+  </p>
+  <p>
+    <strong>Under the exclusion convention, which is what the code does:</strong>
+    <code>pass_hat_k</code> is applied per task with that task's
+    <em>surviving</em> trial count as the denominator, and the suite figure is
+    an unweighted mean across tasks. Since the function returns
+    <code>C(successes, k) / C(trials, k)</code> and <code>C(n,k)</code> grows
+    with <code>n</code>, <strong>the same success count contributes more from a
+    task with fewer survivors</strong> &mdash; at k=2, two successes give 1.0000
+    on two survivors and 0.1000 on five. A task whose failed attempts were
+    dropped contributes the maximum, then averages with equal weight against
+    tasks measured on their full record.
+  </p>
+  <p>
+    <strong>How often this bites in practice depends on infrastructure-error
+    rates, and I executed nothing.</strong> The mechanism is in the code; the
+    frequency is not something a code read can produce.
+  </p>
+
+  <h3><span class="fnum">6</span>The exclusion is applied on an attribution the code never establishes &mdash; and the maintainers found one instance themselves. <span class="grade">[E]</span></h3>
+  <p>
+    <code>progress.py:92</code> catches with a blanket
+    <code>except Exception as e:</code>; <code>:120</code> assigns
+    <code>INFRASTRUCTURE_ERROR</code> unconditionally, with no inspection of the
+    exception; <code>agent_metrics.py:145</code> then filters on that label
+    alone.
+  </p>
+  <p>
+    <strong>And <code>:124-129</code> retains <code>error_type</code>, the full
+    traceback, and the attempt count</strong> &mdash; precisely the information
+    that would distinguish a provider outage from a model emitting malformed
+    JSON. The instrument keeps the evidence and uses the assertion.
+  </p>
+  <p>
+    <code>CHANGELOG.md:103</code> documents that the maintainers hit this:
+    hallucinated tool calls propagating through <code>run_with_retry</code> and
+    being <em>"binned as <code>INFRASTRUCTURE_ERROR</code>."</em>
+    <strong>Agent failure, excluded under an infrastructure label. Fixed in
+    v1.0.1.</strong> A second route appears still open at the pinned commit:
+    <code>llm_utils.py:440</code> parses
+    <code>json.loads(tool_call.function.arguments)</code> outside any guard, so
+    a model emitting invalid JSON is retried, relabelled, and dropped.
+  </p>
+
+  <h3><span class="fnum">7</span>"&tau;-bench" does not identify a version. <span class="grade">[E]</span></h3>
+  <p>
+    The name designates the original repository, the <code>tau2-bench</code>
+    repository, and <code>v1.0.1</code> of that repository &mdash; while
+    <code>v1.0.0</code> is titled &tau;&sup3;-bench and no
+    <code>tau3-bench</code> repository exists. <strong>A reader comparing
+    published results across papers cannot resolve which artefact produced them
+    from the name alone.</strong> Not a defect, but the v1.0.1 grading update
+    required leaderboard submissions to be re-graded, which suggests version
+    identity already matters here.
+  </p>
+
+  <h4>One finding that runs in the maintainers' favour</h4>
+  <p>
+    The Q7 question asks which tasks have a goal state satisfiable by taking no
+    action &mdash; where an agent that terminates without acting scores a
+    perfect 1.0.
+  </p>
+  <p>
+    <strong>In the original repository: 24 of 165 test tasks, 14.55%, and 38% in
+    the airline domain. In v1.0.1: 11 of 2,556, 0.43%, with airline and telecom
+    at zero.</strong>
+  </p>
+  <p>
+    <strong>&#9888; Both counts are <span class="grade">[I]</span>, not
+    <span class="grade">[E]</span></strong>, resting on a static analysis that
+    was wrong twice before it was right. And the narrowing matters: a
+    <em>crashed</em> trial never reaches the reward path. What passes by
+    inaction is a trial terminating <strong>normally</strong> without acting,
+    which is materially smaller than the question's premise.
+  </p>
+  <p>
+    <strong>I assumed I was measuring a static property and found I was
+    measuring an improvement.</strong> The surface shrank by more than an order
+    of magnitude, and the release notes credit the task fixes to outside
+    analysis by others. It shrank because the maintainers acted on someone
+    else's audit.
+  </p>
+</section>
+
+<section>
+  <h2><span class="secnum">05</span>The deviations that made the findings smaller</h2>
+  <p>
+    Eleven deviations are logged. <strong>Four record decisions that reduced
+    what could be claimed</strong>, and they are the part of this record I would
+    point a skeptical reader at first. Anyone can publish a null; a documented
+    trail of points where a finding could have been made larger and was not is
+    harder to manufacture.
+  </p>
+  <ul class="fals">
+    <li>
+      <strong>A confirmatory test was designed that was structurally incapable
+      of failing.</strong> Two sets stood in a subset relation by construction,
+      so the check could not have come out any other way. It was caught by the
+      executing agent, not by the party that designed it, and the substantive
+      conclusion was recovered from a different, non-degenerate measurement.
+      <span class="dref">(D-5)</span>
+    </li>
+    <li>
+      <strong>The only positive-shaped result in five checks was drafted, then
+      withdrawn.</strong> &tau;&sup2;-bench's <code>pass^k</code> cell was
+      written as POSITIVE and reversed on re-reading the frozen plan's
+      requirement that a unit <em>"must persist and keep accruing"</em> real
+      failures. Establishing that would require running the benchmark, which the
+      plan forbids. <strong>The reversal moved away from the more interesting
+      finding.</strong> <span class="dref">(D-9)</span>
+    </li>
+    <li>
+      <strong>A finding was nearly sent that the maintainers had already
+      addressed.</strong> The release documentation was never swept during the
+      read. Sweeping it afterwards found the second <code>pass^k</code>
+      convention and the maintainers' own record of the mislabelling &mdash;
+      which <strong>strengthened one finding and rewrote another</strong>, and
+      would have been embarrassing to discover after publication.
+      <span class="dref">(D-10)</span>
+    </li>
+    <li>
+      <strong>A prevalence claim was not made</strong> where the evidence was
+      <span class="grade">[R]</span>-graded and the reconstruction gap reached
+      every magnitude in the section.
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="secnum">06</span>What this does not support</h2>
+  <p>
+    <strong>It does not support a claim that the defect is common.</strong> Five
+    instruments, five negatives &mdash; and all five are <em>public</em>, built
+    by people who expected outside scrutiny. This says little about private
+    internal metrics no outsider has read.
+  </p>
+  <p>
+    <strong>It does not support a prevalence claim of any kind.</strong> Seven
+    findings across two instruments is not a population.
+  </p>
+  <p>
+    <strong>The one figure clearing the materiality threshold on the firmest
+    evidence establishes only that a question could not be answered.</strong>
+    Nothing that clears the threshold anywhere in this audit is read rather than
+    inferred.
+  </p>
+  <p>
+    <strong>And it does not support treating a code path as an
+    instantiation.</strong> That distinction cost the only positive-shaped
+    result available, and it was the right call.
+  </p>
+</section>
+
+<section>
+  <h2><span class="secnum">07</span>Provenance, stated plainly</h2>
+  <p>
+    <strong>The code reading and the analysis were performed by an AI coding
+    agent working to a brief fixed before the read. The evidence summaries and
+    the draft branch assignments were prepared with AI assistance.</strong>
+  </p>
+  <p>
+    I commissioned the work, held the procedural gates, ruled at the decision
+    points the frozen text does not settle, and caught errors &mdash; including
+    several where accepting the analysis would have produced a more flattering
+    result. <strong>This is not expert review, not peer review, and confers no
+    warrant.</strong>
+  </p>
+  <p>
+    <strong>Total effort across both instruments: 3.55 hours.</strong>
+    Twenty-six minutes of wall clock on the first, thirty-five on the second.
+    That number is recorded plainly because the claim that this check is cheap
+    to run is unsupported without it.
+  </p>
+</section>
+
+<section>
+  <h2><span class="secnum">08</span>Correspondence</h2>
+  <p>
+    Both sets of maintainers were contacted before this write-up, with a
+    correction window closing <strong>6 September 2026</strong>.
+  </p>
+  <ul class="fals">
+    <li>
+      <strong>Sierra</strong> &mdash; via the project's own documented channel,
+      a public GitHub issue on <code>tau2-bench</code>, 28 August.
+      <em>(The repository publishes no security contact and names GitHub Issues
+      as its route for questions.)</em>
+    </li>
+    <li>
+      <strong>The WSDM Cup 2018 organisers</strong> &mdash; by email, 28 August.
+    </li>
+  </ul>
+  <p style="margin-top:26px">
+    <strong>Any reply is published below, in full and unedited.</strong> Where
+    there is no reply, that is stated.
+  </p>
+  <div class="heldopen">
+    <span class="hlabel">Held open until 6 September 2026</span>
+    <p>
+      <em>This section is reserved for replies from the maintainers of either
+      instrument.</em> It is published empty rather than omitted, so that the
+      absence of a reply is on the record in the same place a reply would be.
+    </p>
+  </div>
+</section>
+
+<section id="check">
+  <h2><span class="secnum">09</span>How to check this</h2>
+  <p>
+    Everything below is public. The record lives in two places on purpose
+    &mdash; GitHub is browsable and diffable, OSF is an archive with a DOI. A
+    record whose whole claim is verifiability should not depend on one host
+    staying up.
+  </p>
+  <p class="metarow" style="margin-top:22px">
+    <span><strong>The full record:</strong> <a href="https://github.com/davidmullett/loopzero-audit-2026" target="_blank" rel="noopener"><code>github.com/davidmullett/loopzero-audit-2026</code></a></span>
+    <span>archived copy at <a href="https://osf.io/4uxz3/" target="_blank" rel="noopener"><code>osf.io/4uxz3</code></a></span>
+  </p>
+
+  <div class="tablewrap" style="margin-top:26px">
+    <table class="dtable cols-recs">
+      <thead>
+        <tr><th scope="col"></th><th scope="col">Where</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>The frozen plan</strong>, in full, with its SHA-256</td>
+          <td class="r-val">
+            <span><a href="https://github.com/davidmullett/loopzero-audit-2026/blob/main/PRE-REGISTRATION.md" target="_blank" rel="noopener">PRE-REGISTRATION.md</a></span>
+            <span><a href="https://github.com/davidmullett/loopzero-audit-2026/blob/main/PRE-REGISTRATION.sha256" target="_blank" rel="noopener">PRE-REGISTRATION.sha256</a></span>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>The registration</strong> &mdash; the timestamp anchor</td>
+          <td class="r-val">
+            <span><a href="https://osf.io/ksm3n/" target="_blank" rel="noopener">osf.io/ksm3n</a></span>
+            <span>DOI <a href="https://doi.org/10.17605/OSF.IO/KSM3N" target="_blank" rel="noopener">10.17605/OSF.IO/KSM3N</a></span>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>The answers</strong> &mdash; every question, with citations to paths and line ranges at the pinned commits, and an evidence grade on each claim</td>
+          <td class="r-val">
+            <span><a href="https://github.com/davidmullett/loopzero-audit-2026/blob/main/KKBOX-ANSWERS.md" target="_blank" rel="noopener">KKBOX-ANSWERS.md</a></span>
+            <span><a href="https://github.com/davidmullett/loopzero-audit-2026/blob/main/TAU-ANSWERS.md" target="_blank" rel="noopener">TAU-ANSWERS.md</a></span>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>The branch assignments</strong>, with the reasoning for each condition and the two hard calls stated as calls</td>
+          <td class="r-val">
+            <span><a href="https://github.com/davidmullett/loopzero-audit-2026/blob/main/KKBOX-VERDICT.md" target="_blank" rel="noopener">KKBOX-VERDICT.md</a></span>
+            <span><a href="https://github.com/davidmullett/loopzero-audit-2026/blob/main/TAU-VERDICT.md" target="_blank" rel="noopener">TAU-VERDICT.md</a></span>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>The deviations log</strong> &mdash; all eleven, including the four that reduced what could be claimed</td>
+          <td class="r-val"><a href="https://github.com/davidmullett/loopzero-audit-2026/blob/main/DEVIATIONS.md" target="_blank" rel="noopener">DEVIATIONS.md</a></td>
+        </tr>
+        <tr>
+          <td><strong>The analysis scripts</strong> &mdash; runnable against your own copy</td>
+          <td class="r-val"><a href="https://github.com/davidmullett/loopzero-audit-2026/tree/main/scripts" target="_blank" rel="noopener">scripts/</a></td>
+        </tr>
+        <tr>
+          <td><strong>What was sent to the maintainers, and when</strong></td>
+          <td class="r-val"><a href="https://github.com/davidmullett/loopzero-audit-2026/tree/main/correspondence" target="_blank" rel="noopener">correspondence/</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:28px">
+    <strong>Verify the plan yourself.</strong> The registered artifact is a
+    hash, so this is the check that matters:
+  </p>
+  <div class="cite-box">curl -sL https://raw.githubusercontent.com/davidmullett/loopzero-audit-2026/main/PRE-REGISTRATION.md | shasum -a 256</div>
+  <div class="cite-box" style="margin-top:10px">b15f472ef72994970957eda1e1ebc53f5480b759eb6ab71e076496145a7fda0e</div>
+
+  <p style="margin-top:28px">
+    The plan was frozen at <strong>2026-08-24T15:33:01Z</strong> and registered
+    <strong>27 minutes later, at 15:59:52Z</strong>. Both reads were completed
+    on 27 August. The hash was published before the instruments were opened;
+    the plan itself was withheld until now, which is why the registration
+    records a hash rather than a document.
+  </p>
+  <p>
+    <strong>No KKBOX data is published</strong>, per &sect;7.B of the
+    competition rules, which forbid redistribution. The scripts are publishable
+    under &sect;8.B, so anyone who has accepted those rules can run them against
+    their own copy. Verification transfers; the data does not move.
+  </p>
+  <p>
+    <strong>The &tau;-bench repositories are MIT-licensed</strong>, so the code
+    is quoted directly and every claim cites a path and line range at a pinned
+    SHA.
+  </p>
+  <div class="closer">
+    Any reader can apply the stated rule to the published evidence and see
+    whether they reach my branch. Disagreement is invited, and substantive
+    disagreement gets published alongside the finding.
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-text metarow">
+    <span>loopzero.org</span>
+    <span><a href="https://davidmullett.com/" target="_blank" rel="noopener">davidmullett.com</a></span>
+    <span><a href="https://orcid.org/0009-0004-2543-1664" target="_blank" rel="noopener">ORCID&nbsp;0009-0004-2543-1664</a></span>
+    <span><a href="https://github.com/davidmullett/loopzero-paper-public" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
