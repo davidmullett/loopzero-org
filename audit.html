@@ -130,6 +130,11 @@ code { font-family:var(--mono); font-size:0.82em; color:var(--ink); }
   background:var(--paper-2); padding:18px 22px; }
 .notice > *:first-child { margin-top:0; }
 .notice p { font-size:var(--t-aux); max-width:none; color:var(--ink-2); line-height:1.65; }
+/* PROPOSED — muted parenthetical note. Italic only; colour and size are
+   inherited from .notice p, giving §9's .closer register (italic, --ink-2,
+   --t-aux) without its section-terminating top rule. Scoped so .notice em's
+   darkening to --ink does not apply. */
+.notice p.note { font-style:italic; }
 .notice em { font-style:italic; color:var(--ink); }
 
 .fals { list-style:none; max-width:58ch; border-top:1px solid var(--rule-lt); }
@@ -671,12 +676,12 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
       <table class="dtable">
         <tbody>
           <tr>
-            <td><strong>Shou-De Lin</strong> &mdash; <code>sdlin@csie.ntu.edu.tw</code></td>
+            <td><strong>Shou-De Lin</strong> &mdash; National Taiwan University</td>
             <td><strong>Delivered. No reply.</strong></td>
           </tr>
           <tr>
-            <td><strong>Xing Xie</strong> &mdash; <code>xingx@microsoft.com</code></td>
-            <td><strong>NOT DELIVERED.</strong> Returned twelve seconds later: <em>"the address couldn't be found, or is unable to receive mail."</em></td>
+            <td><strong>Xing Xie</strong> &mdash; Microsoft</td>
+            <td><strong>NOT DELIVERED.</strong> The address used was inferred from his institutional profile and was never published by him; it returned, twelve seconds later, <em>"the address couldn't be found, or is unable to receive mail."</em></td>
           </tr>
           <tr>
             <td><strong>Yian Chen</strong>, KKBOX</td>
@@ -689,6 +694,12 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
         </tbody>
       </table>
     </div>
+    <p class="note">
+      Addresses are not reproduced here. Two of the four organisers had
+      addresses that could be found; one was published by its owner and one was
+      inferred from a profile URL. Neither is evidence of anything a reader
+      could check, and one of them may not belong to the person it was sent to.
+    </p>
     <p>
       <strong>So the two people &sect;8 names &mdash; the KKBOX employees
       &mdash; were never reached</strong>, and of the two academic
