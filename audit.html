@@ -293,7 +293,7 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
     There is also a persistence requirement: the unit must <strong>keep
     accruing</strong> real failures while being structurally unrecordable.
     <strong>Termination is not absorption.</strong> A trial that crashes and
-    stops has not entered an absorbing state; it has simply ended.
+    stops has simply ended.
   </p>
 </section>
 
@@ -370,12 +370,10 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
     absorption."</em>
   </p>
   <p>
-    Direction: right. <strong>Mechanism: wrong, and not by imprecision.</strong>
     Censoring was specifically tested for and found absent in the release where
     it could be tested &mdash; churn is flat at roughly 6% across expiry days
     1&ndash;27 while observability falls from 27 days to 1. The predicted
-    mechanism was examined and ruled out. The finding is exclusion, which is a
-    different branch.
+    mechanism was examined and ruled out. The finding is exclusion.
   </p>
   <p>
     For &tau;-bench the plan predicted the exact place to look and the code had
@@ -393,8 +391,10 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
     against a fixed public artefact.
   </p>
   <p>
-    <strong>Evidence grades are carried throughout and they are not
-    decoration.</strong>
+    <strong>Evidence grades are carried throughout.</strong> Each says how far
+    a claim could move if someone re-derived it: <span class="grade">[E]</span>
+    is read off a fixed artefact and will not move; <span class="grade">[I]</span>
+    is traced rather than executed and might.
   </p>
   <ul class="fals">
     <li><span class="grade">[E]</span> &nbsp;read directly off code or documentation</li>
@@ -529,9 +529,8 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
   <p>
     <strong>Both counts are <span class="grade">[I]</span>, not
     <span class="grade">[E]</span></strong>, resting on a static analysis that
-    was wrong twice before it was right. And the narrowing matters: a
-    <em>crashed</em> trial never reaches the reward path. What passes by
-    inaction is a trial terminating <strong>normally</strong> without acting,
+    was wrong twice before it was right. And the narrowing matters: what
+    passes by inaction is a trial terminating <strong>normally</strong> without acting,
     which is materially smaller than the question's premise.
   </p>
   <p>
@@ -606,9 +605,9 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
     inferred.
   </p>
   <p>
-    <strong>And it does not support treating a code path as an
-    instantiation.</strong> That distinction cost the only positive-shaped
-    result available, and it was the right call.
+    <strong>And it does not support reading a present code path as a live
+    mechanism.</strong> That call cost the only positive-shaped result
+    available, and it was right.
   </p>
 </section>
 
@@ -698,8 +697,6 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
     <p>
       <strong>The bounce notice arrived in the same inbox that recorded the
       send, on the same day, and was not noticed until 8 September.</strong>
-      It is disclosed here rather than left for a reader to infer from the
-      absence of a reply.
     </p>
     <p>
       <strong>This is a partial discharge of &sect;8 and is recorded as
