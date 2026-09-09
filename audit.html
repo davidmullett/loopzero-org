@@ -121,14 +121,16 @@ code { font-family:var(--mono); font-size:0.82em; color:var(--ink); }
 .result p { font-size:var(--t-lede); max-width:none; }
 .result .pull { font-weight:500; }
 
-/* PROPOSED — held-open correspondence block. Declarations copied from
-   paper.html .superseded (amber top rule = attention notice), new semantic name. */
-.heldopen { max-width:58ch; border:1px solid var(--rule-2); border-top:3px solid var(--over);
+/* PROPOSED — attention notice. Renamed from .heldopen, whose only consumer
+   (the dated correspondence placeholder) is removed now the window has closed.
+   Same declarations, same amber top rule from paper.html .superseded; it now
+   carries §8's KKBOX notification correction, so the paragraph rule allows
+   more than one paragraph and a leading heading sits flush to the top edge. */
+.notice { max-width:58ch; border:1px solid var(--rule-2); border-top:3px solid var(--over);
   background:var(--paper-2); padding:18px 22px; }
-.heldopen .hlabel { font-family:var(--mono); font-size:var(--t-label-xs); font-weight:500; letter-spacing:0.24em;
-  text-transform:uppercase; color:var(--ink); display:block; margin-bottom:10px; }
-.heldopen p { font-size:var(--t-aux); max-width:none; color:var(--ink-2); line-height:1.65; margin-bottom:0; }
-.heldopen em { font-style:italic; color:var(--ink); }
+.notice > *:first-child { margin-top:0; }
+.notice p { font-size:var(--t-aux); max-width:none; color:var(--ink-2); line-height:1.65; }
+.notice em { font-style:italic; color:var(--ink); }
 
 .fals { list-style:none; max-width:58ch; border-top:1px solid var(--rule-lt); }
 .fals li { padding:13px 0 13px 22px; border-bottom:1px solid var(--rule-lt); position:relative;
@@ -635,32 +637,122 @@ footer { margin-top:84px; padding-top:20px; border-top:1px solid var(--rule-lt);
 <section>
   <h2><span class="secnum">08</span>Correspondence</h2>
   <p>
-    Both sets of maintainers were contacted before this write-up, with a
+    Both instruments' maintainers were contacted before this write-up, with a
     correction window closing <strong>6 September 2026</strong>.
+    <strong>Neither replied.</strong> What follows is the full account,
+    including where the contact failed.
   </p>
-  <ul class="fals">
-    <li>
-      <strong>Sierra</strong> &mdash; via the project's own documented channel,
-      a public GitHub issue on <code>tau2-bench</code>, 28 August.
-      <em>(The repository publishes no security contact and names GitHub Issues
-      as its route for questions.)</em>
-    </li>
-    <li>
-      <strong>The WSDM Cup 2018 organisers</strong> &mdash; by email, 28 August.
-    </li>
-  </ul>
-  <p style="margin-top:26px">
-    <strong>Any reply is published below, in full and unedited.</strong> Where
-    there is no reply, that is stated.
+  <p>
+    <strong>Sierra &mdash; contacted, no reply.</strong> Via the project's own
+    documented channel, a public GitHub issue on <code>tau2-bench</code>,
+    28 August. <em>(The repository publishes no security contact and names
+    GitHub Issues as its route for questions.)</em> A direct note went to two
+    named authors of the &tau;&sup2;-Bench paper on 31 August, after the issue
+    had sat five days without a reply, a label or an assignee.
+    <strong>As of 8 September the issue remains open, unlabelled and
+    unassigned, with no comment from the maintainers.</strong>
   </p>
-  <div class="heldopen">
-    <span class="hlabel">Held open until 6 September 2026</span>
+
+  <div class="notice" style="margin-top:30px">
+    <h3>The KKBOX notification was only partly delivered, and this is the
+    accurate account</h3>
     <p>
-      <em>This section is reserved for replies from the maintainers of either
-      instrument.</em> It is published empty rather than omitted, so that the
-      absence of a reply is on the record in the same place a reply would be.
+      <strong>&sect;8 of the registered plan names <em>the dataset's publishers
+      (KKBox)</em>.</strong> The WSDM Cup 2018 competition had four organisers:
+      <strong>Shou-De Lin</strong> (National Taiwan University),
+      <strong>Xing Xie</strong> (Microsoft), and <strong>Yian Chen</strong> and
+      <strong>Yuh-Ming Chiu</strong> (KKBOX). The competition site names all
+      four and publishes no addresses for any of them.
+    </p>
+    <p>
+      On 28 August an email went to the two for whom public addresses could be
+      found:
+    </p>
+    <div class="tablewrap" style="margin:20px 0">
+      <table class="dtable">
+        <tbody>
+          <tr>
+            <td><strong>Shou-De Lin</strong> &mdash; <code>sdlin@csie.ntu.edu.tw</code></td>
+            <td><strong>Delivered. No reply.</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Xing Xie</strong> &mdash; <code>xingx@microsoft.com</code></td>
+            <td><strong>&#128308; NOT DELIVERED.</strong> Returned twelve seconds later: <em>"the address couldn't be found, or is unable to receive mail."</em></td>
+          </tr>
+          <tr>
+            <td><strong>Yian Chen</strong>, KKBOX</td>
+            <td>No public address found. Not contacted.</td>
+          </tr>
+          <tr>
+            <td><strong>Yuh-Ming Chiu</strong>, KKBOX</td>
+            <td>No public address found. Not contacted.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <strong>So the two people &sect;8 names &mdash; the KKBOX employees
+      &mdash; were never reached</strong>, and of the two academic
+      co-organisers, one delivery failed silently.
+    </p>
+    <p>
+      <strong>The bounce notice arrived in the same inbox that recorded the
+      send, on the same day, and was not noticed until 8 September.</strong>
+      It is disclosed here rather than left for a reader to infer from the
+      absence of a reply.
+    </p>
+    <p>
+      <strong>This is a partial discharge of &sect;8 and is recorded as
+      one.</strong> The effort was genuine &mdash; all four organisers
+      identified, both findable addresses used &mdash; but <em>"the organisers
+      were notified"</em> would not be a true sentence, and this write-up will
+      not contain it.
     </p>
   </div>
+
+  <p style="margin-top:30px">
+    <strong>Any reply is published below, in full and unedited, whenever it
+    arrives</strong> &mdash; including after publication, marked with the date
+    it came. <strong>Where there is no reply, that is stated rather than
+    omitted.</strong>
+  </p>
+
+  <h3>An independent report on the same harness, which I did not solicit and
+  had no part in</h3>
+  <p>
+    On <strong>3 September</strong>, six days after I finished, a researcher I
+    have never corresponded with filed
+    <a href="https://github.com/sierra-research/tau2-bench/issues/502" target="_blank" rel="noopener">issue&nbsp;#502</a>
+    on <code>tau2-bench</code> and cross-referenced mine from it.
+  </p>
+  <p>
+    <strong>Where I read code and ran nothing, he re-graded public trajectory
+    files across four builds.</strong> He found that <code>evaluate-trajs</code>
+    replays certain telecom files in the wrong environment and scores them
+    anyway &mdash; four files with recorded values of 0.7478, 0.7215, 0.9035
+    and 0.9890 re-grade to 0.1601, 0.0965, 0.1754 and 0.1732, with no error
+    raised and a database match rate of 3 in 456. He controls for it properly:
+    the companion file that <em>is</em> classified correctly re-grades to its
+    recorded value. He also reports that four of 136 pairwise leaderboard
+    orderings reverse between builds.
+  </p>
+  <p>
+    <strong>None of that is the defect I went looking for.</strong> In his
+    cases the trial stays in the denominator and is scored as a
+    <em>failure</em> &mdash; not relabelled and counted as a success. Under my
+    own decision rule that is a misscoring, a different branch. <strong>I am
+    not claiming his findings as mine and there is no overlap in what we
+    assert.</strong> He says the same in his report, and he characterised my
+    work accurately without being asked to.
+  </p>
+  <p>
+    <strong>I am including it because it changes what my null means.</strong>
+    My gate came back negative on this harness. That is a statement about one
+    specific defect, not a clean bill of health &mdash; and six days later
+    somebody using a method I did not use found substantial faults in the same
+    instrument. <strong>A negative result is evidence about the question you
+    asked. It is not evidence that there was nothing to find.</strong>
+  </p>
 </section>
 
 <section id="check">
