@@ -318,8 +318,9 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
     unit crossed below the floor it could never satisfy the rule again, so the
     units failing most continuously were filed, by construction, as healthy
     controls. 69.2% of the nominal control class was in that state. The most
-    natural early-warning statistic pointed the wrong way, and a favourable
-    published result turned out to be an artifact of the contamination.
+    natural early-warning statistic pointed the wrong way, and the indicators
+    behind an earlier preprint's result were later found to be partly coupled
+    to the label rule.
   </p>
   <p>
     The program's subject is now that class of failure: <strong>what a measuring
@@ -342,14 +343,15 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
     detector result existed. Treating starvation as a competing terminal event
     and rebuilding the control class repaired the instrument: the same gate that
     failed now passes (<span class="band">TPR 0.561</span> against a chance rate
-    of 0.05) — the first valid measurement the benchmark produced.
+    of 0.05) — the first time the benchmark could support a detector
+    comparison.
   </p>
   <div class="result">
     <span class="rlabel">Reported in full</span>
     <p class="pull">
       On the repaired instrument, the pre-registered hypothesis failed at every
       alarm budget (<span class="band">ΔTPR = −0.472, CI [−0.496, −0.444]</span>).
-      That null is the published result.
+      That null is the result the paper reports.
     </p>
   </div>
 </section>
@@ -358,7 +360,8 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
 <section id="protocol">
   <h2>The protocol</h2>
   <p>
-    Two checks, an afternoon's work, runnable on any labeled benchmark.
+    Two checks, both cheap and pre-registerable, run before any detector
+    result exists.
   </p>
   <ul class="ladder">
     <li>
@@ -406,9 +409,11 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
     </li>
   </ul>
   <p class="sub" style="margin-top:1.2em">
-    Three witnesses the bridge proposed — gain, persistence, diversity. On the
-    repaired instrument one held its predicted direction, one inverted, one went
-    null. The bridge remains an open empirical question.
+    The original hypothesis predicted churn (G) and occupancy (p) high in units
+    that went on to fail, and coverage (δ) low. On the repaired instrument
+    coverage held its predicted direction, churn inverted and occupancy went
+    null. Whether the hypothesis holds beyond this benchmark remains an open
+    empirical question.
   </p>
 </section>
 
@@ -441,7 +446,7 @@ footer { margin-top: 84px; padding-top: 20px; border-top: 1px solid var(--rule-l
     </li>
     <li>
       <span class="r-key">Prior preprint</span>
-      <span class="r-val"><a href="paper.html"><em>Benchmarking Recursive-Collapse Warning Claims Under Matched False-Positive Control</em></a> · <a href="https://arxiv.org/abs/2606.00329" target="_blank" rel="noopener">arXiv 2606.00329</a>. <strong>Superseded</strong> on its recommender branch by the paper above: the directional result reported there is attributable to the label contamination the successor identifies. Left public and unaltered.</span>
+      <span class="r-val"><a href="paper.html"><em>Benchmarking Recursive-Collapse Warning Claims Under Matched False-Positive Control</em></a> · <a href="https://arxiv.org/abs/2606.00329" target="_blank" rel="noopener">arXiv 2606.00329</a>. Its recommender-branch indicators were later found to be partly coupled to the label rule the paper above describes, which motivated their redefinition. Left public and unaltered.</span>
     </li>
     <li>
       <span class="r-key">ORCID</span>
